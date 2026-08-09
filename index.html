@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1A1030">
+<title>Style Baazar Sarees — DSR • Sales • Stock • Learn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#1A1030; --plum2:#2A1B4A; --plum3:#402C68;
+  --gold:#E5A400; --gold-d:#A87700; --rose:#C2185B;
+  --paper:#F5F4F8; --card:#fff; --line:#E6E3ED; --line2:#F0EEF5;
+  --ink:#14101F; --muted:#6D6880; --muted2:#9B95AC;
+  --green:#0E9F6E; --green-bg:#E7F7F0;
+  --warn:#D98A00; --warn-bg:#FDF3E0;
+  --red:#D92D20; --red-bg:#FDECEA;
+  --grey:#98A2B3; --grey-bg:#EFEEF4;
+  --r:14px; --rs:10px;
+  --sh:0 1px 2px rgba(26,16,48,.05),0 8px 24px -14px rgba(26,16,48,.25);
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--paper);
+  color:var(--ink);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;font-size:16px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.hide{display:none!important}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* AUTH */
+#auth{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px 15px;
+  background:radial-gradient(1100px 560px at 50% -10%,#3A2560 0%,#221541 55%,#150C28 100%)}
+.acard{width:100%;max-width:430px;background:#fff;border-radius:20px;padding:24px 20px 22px;
+  box-shadow:0 30px 70px -18px rgba(0,0,0,.6)}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:16px}
+.btile{width:46px;height:46px;border-radius:13px;background:var(--plum);color:var(--gold);
+  display:grid;place-items:center;font-weight:800;font-size:16px;letter-spacing:-.05em}
+.bt1{font-weight:800;font-size:16.5px;letter-spacing:-.02em;line-height:1.15}
+.bt2{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tagline{font-size:12px;color:var(--muted);margin:-8px 0 16px;font-weight:600}
+.rtabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--grey-bg);padding:4px;border-radius:12px;margin-bottom:15px}
+.rtabs button{border:0;background:transparent;padding:9px 4px;border-radius:9px;font-weight:800;
+  font-size:11.5px;color:var(--muted);cursor:pointer;letter-spacing:.02em}
+.rtabs button.on{background:#fff;color:var(--plum);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.field{margin-bottom:12px}
+label.lb{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.inp{width:100%;padding:13px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:600;color:var(--ink)}
+.inp:focus{border-color:var(--plum3);outline:none;box-shadow:0 0 0 3px rgba(64,44,104,.13)}
+select.inp{appearance:none;padding-right:36px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236D6880' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 11px center}
+textarea.inp{min-height:88px;resize:vertical;line-height:1.5}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--plum);color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.gold{background:var(--gold);color:#2A1B00}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.dgr{background:var(--red)}
+.btn.sm{width:auto;padding:9px 13px;font-size:13px;border-radius:10px}
+.btn.xs{width:auto;padding:6px 10px;font-size:12px;border-radius:8px}
+.alert{padding:10px 12px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:12px;line-height:1.45}
+.a-red{background:var(--red-bg);color:#912018} .a-green{background:var(--green-bg);color:#046C4E}
+.a-info{background:#EEF0FB;color:#31358C} .a-warn{background:var(--warn-bg);color:#8A5A00}
+.foot{margin-top:13px;font-size:11.5px;color:var(--muted2);text-align:center;line-height:1.55}
+.foot a{color:var(--plum3);font-weight:700}
+
+/* SHELL */
+#shell{min-height:100dvh;padding-bottom:76px}
+.top{background:var(--plum);color:#fff;padding:13px 15px 14px;position:sticky;top:0;z-index:40}
+.toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.t1{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.t2{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-top:1px}
+.t3{font-size:11.5px;color:#B6AECB;margin-top:2px;font-weight:600}
+.tbtn{background:rgba(255,255,255,.11);border:0;color:#fff;font-weight:700;font-size:11.5px;padding:7px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
+main{padding:13px 13px 20px;max-width:1240px;margin:0 auto}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);
+  display:flex;z-index:45;padding:5px 3px calc(5px + env(safe-area-inset-bottom));overflow-x:auto}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:1 0 auto;min-width:58px;border:0;background:transparent;padding:5px 5px 4px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:10px;font-weight:800}
+.nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav button.on{color:var(--plum)}
+.nav button.on .nd{opacity:1}
+.nd{width:15px;height:3px;border-radius:3px;background:var(--gold);opacity:0}
+
+/* BLOCKS */
+.sec{margin-bottom:15px}
+.sech{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 8px}
+.sect{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.card.pad{padding:13px}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;box-shadow:var(--sh);cursor:default}
+.kpi.tap{cursor:pointer}
+.kpi .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-size:24px;font-weight:700;margin-top:2px;line-height:1.12}
+.kpi .s{font-size:11px;color:var(--muted);font-weight:600;margin-top:1px}
+.kpi.hero{grid-column:span 2;background:linear-gradient(135deg,#2D1D4E,#1A1030);border-color:#2D1D4E;color:#fff}
+.kpi.hero .k{color:var(--gold)} .kpi.hero .s{color:#B6AECB}
+.g{color:var(--green)} .r{color:var(--red)} .w{color:var(--warn)} .m{color:var(--muted2)}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:800;white-space:nowrap}
+.p-g{background:var(--green-bg);color:#046C4E} .p-w{background:var(--warn-bg);color:#8A5A00}
+.p-r{background:var(--red-bg);color:#912018} .p-m{background:var(--grey-bg);color:#4B5162}
+.seg{display:flex;gap:4px;background:var(--grey-bg);padding:4px;border-radius:12px;overflow:auto}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:1;min-width:52px;border:0;background:transparent;padding:8px 5px;border-radius:9px;font-weight:800;font-size:12px;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--plum);color:#fff}
+.r3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.r2{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:var(--rs);padding:9px 10px}
+.mini .k{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.mini .v{font-size:17px;font-weight:700;margin-top:1px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);border:1px solid var(--line);background:#fff;box-shadow:var(--sh)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{background:#FAF9FC;text-align:right;padding:9px;font-size:10px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--line);cursor:pointer}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px;border-bottom:1px solid var(--line2);text-align:right;white-space:nowrap;font-weight:600}
+tr:last-child td{border-bottom:0}
+.lnk{font-weight:800;color:var(--plum);cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.chip{display:inline-block;padding:2px 6px;border-radius:6px;background:var(--grey-bg);color:#4B5162;font-size:10px;font-weight:800}
+.ins{display:flex;gap:9px;padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;font-weight:600;line-height:1.42}
+.ins:last-child{border-bottom:0}
+.ins i{font-style:normal;font-size:14px}
+.empty{padding:24px 15px;text-align:center;color:var(--muted);font-size:13px;font-weight:600}
+.cbox{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:11px;box-shadow:var(--sh);margin-bottom:10px}
+.cbox h4{margin:0 0 8px;font-size:12px;font-weight:800}
+.cwrap{position:relative;height:240px}
+.fg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--plum);color:#fff;
+  padding:11px 16px;border-radius:12px;font-weight:700;font-size:13px;z-index:90;max-width:90vw;text-align:center;
+  box-shadow:0 14px 34px -10px rgba(0,0,0,.5)}
+.toast.bad{background:var(--red)}
+.ovl{position:fixed;inset:0;background:rgba(15,10,28,.55);z-index:80;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;width:100%;max-width:680px;border-radius:20px 20px 0 0;padding:17px 15px calc(20px + env(safe-area-inset-bottom));max-height:92dvh;overflow:auto}
+@media(min-width:700px){.ovl{align-items:center}.sheet{border-radius:18px;max-height:88dvh}}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;gap:10px}
+.sh h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.x{border:0;background:var(--grey-bg);width:31px;height:31px;border-radius:50%;font-size:16px;font-weight:800;color:var(--muted);cursor:pointer;flex:0 0 auto}
+.spin{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(28px,1fr));gap:3px}
+.cd{aspect-ratio:1;border-radius:5px;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff}
+.cd.ok{background:#35A886} .cd.no{background:#E58585} .cd.na{background:#DCDAE4;color:#8B87A0}
+.lg{display:flex;gap:11px;font-size:11px;font-weight:700;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.lg span{display:flex;align-items:center;gap:5px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+.note{font-size:11.5px;color:var(--muted);font-weight:600;line-height:1.5}
+.hr{height:1px;background:var(--line);margin:13px 0}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:13px}
+.kv:last-child{border-bottom:0}
+.kv b{font-weight:800}
+.pgr{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 2px}
+.pcard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:var(--sh)}
+.pcard img{width:100%;height:150px;object-fit:cover;display:block;background:var(--grey-bg)}
+.pcard .pb{padding:11px}
+.pcard h5{margin:0 0 3px;font-size:14.5px;font-weight:800}
+.bar{height:7px;border-radius:5px;background:var(--grey-bg);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--plum3);border-radius:5px}
+.badge{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:9px;background:var(--red);
+  color:#fff;font-size:9.5px;font-weight:800;display:grid;place-items:center;padding:0 4px}
+.rel{position:relative}
+@media(min-width:780px){
+  .kgrid{grid-template-columns:repeat(4,1fr)}
+  .kpi.hero{grid-column:span 2}
+  .fg{grid-template-columns:repeat(4,1fr)}
+  .nav{position:sticky;top:0;justify-content:center;border-top:0;border-bottom:1px solid var(--line)}
+  #shell{padding-bottom:18px}
+  .nav button{flex:0 0 auto;min-width:88px}
+  .r2.wide{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div id="auth"></div>
+<div id="shell" class="hide">
+  <header class="top">
+    <div class="toprow">
+      <div>
+        <div class="t1">Style Baazar Sarees</div>
+        <div class="t2" id="tT"></div>
+        <div class="t3" id="tS"></div>
+      </div>
+      <button class="tbtn" onclick="logout()">Log out</button>
+    </div>
+  </header>
+  <nav class="nav" id="nav"></nav>
+  <main id="view"></main>
+</div>
+<div id="modal"></div>
+<div id="toastHost"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+const STORE_SEED=[
+["EB-BERHAMPORE", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 16718, 2006],
+["EB-RAGHUNATHGANJ", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 7402, 1430],
+["EB-RAMPURHAT", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 9600, 1146],
+["EB-SURI", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 8437, 656],
+["SB-BERHAMPORE", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 7311, 1391],
+["SB-DOMKAL", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 6753, 1170],
+["SB-DHULIYAN", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 9128, 1550],
+["SB-NALHATI", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 10700, 1130],
+["SB-RAGHUNATHGANJ", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 8478, 786],
+["SB-RAMPURHAT", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 8706, 1503],
+["SB-SURI", "WEST BENGAL", "WB-01", "ANGAD SINGH", "L2L", 9791, 998],
+["SB-ALIPURDUAR", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 9031, 1747],
+["SB-COOCHBEHAR", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 12000, 2241],
+["SB-DHUPGURI", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 15477, 1220],
+["SB-DINHATA", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 14500, 1454],
+["SB-JALPAIGURI", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 7314, 1252],
+["SB-MALBAZAR", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 6711, 1063],
+["SB-TUFANGANJ", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "L2L", 6974, 966],
+["EB-COOCHBEHAR", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "< 1 YR", 10327, 4081],
+["EB-DINHATA", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "< 1 YR", 9424, 1715],
+["SB-SEVOKE ROAD", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "< 1 YR", 11817, 2680],
+["SB-FALAKATA", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "NEW", 7900, 1937],
+["SB-SLI_S V MALL", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "NEW", 9500, 2680],
+["SB-SHIVMANDIR_SILIGURI", "WEST BENGAL", "WB-02", "ASHOK KUMAR CHOUDHARY", "NEW", 8190, 0],
+["EB-KRISHNANAGAR", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 11700, 1511],
+["SB-BANGAON", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 8000, 1239],
+["SB-BASIRHAT", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 11000, 1372],
+["SB-CHAKDAH", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 11555, 2124],
+["SB-KARIMPUR", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 7233, 1444],
+["SB-KRISHNANAGAR", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 7015, 1407],
+["SB-MALANCHA", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 8100, 1064],
+["SB-RANAGHAT", "WEST BENGAL", "WB-03", "BAPI SAHA", "L2L", 7585, 1101],
+["EB-BASIRHAT", "WEST BENGAL", "WB-03", "BAPI SAHA", "< 1 YR", 8500, 1870],
+["EB-RANAGHAT", "WEST BENGAL", "WB-03", "BAPI SAHA", "< 1 YR", 12364, 1946],
+["EB-ARAMBAGH", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 8686, 1281],
+["MB-CHINSURAH", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 990, 138],
+["SB-ARAMBAGH", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 8000, 1050],
+["SB-CHINSURAH", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 10663, 1354],
+["SB-DANKUNI", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 12500, 1284],
+["SB-RAMRAJATALA", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 7900, 1551],
+["SB-SANTRAGACHI", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 6538, 1335],
+["SB-SERAMPORE", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 8500, 1353],
+["SB-SINGUR", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "L2L", 10000, 1304],
+["SB-UTTARPARA", "WEST BENGAL", "WB-04", "DIPANKAR SAMANTA", "< 1 YR", 7300, 1704],
+["SB-BALURGHAT", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 8870, 1121],
+["SB-CHANCHAL", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 8853, 1627],
+["SB-GAZOLE", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 9020, 1519],
+["SB-ISLAMPUR", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 9488, 2192],
+["SB-KALIACHAK", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 14826, 1131],
+["SB-MALDA (01)", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 16765, 0],
+["SB-PAKUAHAT", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 6771, 906],
+["SB-RAIGANJ (01)", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 6076, 876],
+["SB-RATUA", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "L2L", 6700, 1377],
+["SB-MALDA (02)", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "< 1 YR", 18288, 4015],
+["SB-RAIGANJ (02)", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "< 1 YR", 7457, 1235],
+["EB-CHA_HCP ROAD", "WEST BENGAL", "WB-05", "INDRAJIT SAHA", "NEW", 6650, 0],
+["SB-BANKURA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 9000, 1400],
+["SB-BOLPUR", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 11955, 1373],
+["SB-BARDHAMAN (01)", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 11290, 1596],
+["SB-DURGAPUR", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 12000, 1566],
+["SB-ILLAMBAZAR", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 8586, 1104],
+["SB-KATWA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 4200, 835],
+["SB-MEMARI", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 6055, 1392],
+["SB-PANDUA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "L2L", 7943, 1519],
+["EB-BANKURA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "< 1 YR", 13569, 2592],
+["EB-PANDUA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "< 1 YR", 8200, 1253],
+["SB-BARDHAMAN (02)", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "< 1 YR", 7201, 1355],
+["SB-GUSKARA", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "< 1 YR", 8375, 1556],
+["SB-BOL_PS ROAD", "WEST BENGAL", "WB-06", "MITHUN SANYAL", "NEW", 13300, 0],
+["EB-KOL_AXIS MALL", "WEST BENGAL", "WB-07", "RAHUL SEN", "L2L", 6232, 1073],
+["SB-KOL_BAGUIHATI", "WEST BENGAL", "WB-07", "RAHUL SEN", "L2L", 4432, 982],
+["SB-KOL_HATIBAGAN", "WEST BENGAL", "WB-07", "RAHUL SEN", "L2L", 8218, 1370],
+["SB-HOW_SALKIA", "WEST BENGAL", "WB-07", "RAHUL SEN", "< 1 YR", 4930, 818],
+["SB-HOW_RANGOLI MALL", "WEST BENGAL", "WB-07", "RAHUL SEN", "< 1 YR", 12305, 1381],
+["SB-KOL_LINDSAY", "WEST BENGAL", "WB-07", "RAHUL SEN", "< 1 YR", 13365, 2225],
+["SB-HOW_HOWRAH MAIDAN (02)", "WEST BENGAL", "WB-07", "RAHUL SEN", "< 1 YR", 14885, 1857],
+["SB-HOW_AVANI MALL", "WEST BENGAL", "WB-07", "RAHUL SEN", "NEW", 7684, 1276],
+["SB-KOL_AXIS MALL (02)", "WEST BENGAL", "WB-07", "RAHUL SEN", "NEW", 10420, 1795],
+["SB-KOL_HATIBAGAN (02)", "WEST BENGAL", "WB-07", "RAHUL SEN", "NEW", 16200, 0],
+["EB-KANCHRAPARA", "WEST BENGAL", "WB-08", "RANJIT PATHAK", "L2L", 25516, 2721],
+["SB-KANCHRAPARA", "WEST BENGAL", "WB-08", "RANJIT PATHAK", "L2L", 19683, 1988],
+["SB-NAIHATI", "WEST BENGAL", "WB-08", "RANJIT PATHAK", "L2L", 5770, 1161],
+["SB-BARRACKPORE", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "L2L", 15238, 1888],
+["SB-HABRA", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "L2L", 8948, 1248],
+["SB-SODEPUR", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "L2L", 8200, 812],
+["EB-HABRA", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "< 1 YR", 9130, 1489],
+["EB-SODEPUR", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "< 1 YR", 8678, 1261],
+["SB-BARANAGAR", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "< 1 YR", 9499, 1149],
+["EB-BRR_GHOSH PARA ROAD", "WEST BENGAL", "WB-09", "RITWIK LAHIRI", "NEW", 18500, 0],
+["SB-AMTALA", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 7727, 944],
+["SB-BARUIPUR (01)", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 7474, 1185],
+["SB-BARUIPUR (02)", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 5574, 1073],
+["SB-KAKDWIP", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 7900, 1121],
+["SB-GARIAHAT", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 5081, 1180],
+["SB-JAMES LONG SARANI", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 4879, 1315],
+["SB-METIABRUZ", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 4941, 790],
+["SB-METRO EMPORIUM", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 33815, 3511],
+["SB-THAKURPUKUR", "WEST BENGAL", "WB-10", "SANDIP JHA", "L2L", 9124, 1905],
+["SB-BAKRAHAT", "WEST BENGAL", "WB-10", "SANDIP JHA", "< 1 YR", 11366, 1936],
+["SB-BAGHAJATIN", "WEST BENGAL", "WB-10", "SANDIP JHA", "NEW", 8027, 1142],
+["SB-KOL_BANSDRONI", "WEST BENGAL", "WB-10", "SANDIP JHA", "NEW", 7038, 0],
+["EB-BAGNAN", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "L2L", 6537, 1230],
+["SB-BAGNAN", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "L2L", 6118, 1040],
+["SB-CONTAI", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "L2L", 7000, 618],
+["SB-EGRA", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "L2L", 6221, 1140],
+["SB-ULUBERIA", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "L2L", 7240, 828],
+["SB-KHARAGPUR", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "< 1 YR", 7042, 1368],
+["SB-MIDNAPORE", "WEST BENGAL", "WB-11", "TUSAR RANJAN DAS", "< 1 YR", 7830, 1475]
+];/* ===================================================================
+   STYLE BAAZAR SAREES — DSR • SALES • STOCK • PRODUCT KNOWLEDGE
+   Single-file application. Cloud database: Firebase Firestore.
+   =================================================================== */
+
+/* ---- Built-in cloud database (public web config; the database itself
+        is protected by Firestore security rules, not by hiding this) ---- */
+const FB_CFG = {
+  apiKey: "AIzaSyB9kc1rOEc4aSPYGAa3fpNi4i_yYZSYJRA",
+  authDomain: "style-baazar-fynd.firebaseapp.com",
+  projectId: "style-baazar-fynd",
+  storageBucket: "style-baazar-fynd.firebasestorage.app",
+  messagingSenderId: "1010460837422",
+  appId: "1:1010460837422:web:7f37f1e1d55ba151c041bf"
+};
+
+const TZ = 'Asia/Kolkata';
+const LS = { cfg:'sbs_cfg', sess:'sbs_sess', local:'sbs_local_v1' };
+const MEM = {};
+const LSTORE = (function(){ try{ const t=window.localStorage; t.setItem('__t','1'); t.removeItem('__t'); return t; }catch(e){ return null; } })();
+const SS = {
+  get(k){ try{ return LSTORE?LSTORE.getItem(k):(k in MEM?MEM[k]:null); }catch(e){ return (k in MEM)?MEM[k]:null; } },
+  set(k,v){ try{ if(LSTORE)LSTORE.setItem(k,v); else MEM[k]=v; }catch(e){ MEM[k]=v; } },
+  del(k){ try{ if(LSTORE)LSTORE.removeItem(k); else delete MEM[k]; }catch(e){ delete MEM[k]; } }
+};
+
+const DEFAULT_CATS = ['Jamdani','Banarasi','Tant','Tussar','Kanjivaram','Cotton','Silk','Linen','Organza','Georgette','Printed','Designer','Party Wear','Wedding','Festive'];
+
+const state = {
+  mode:'local', ready:false,
+  stores:{}, dsr:{}, monthly:{}, stock:{}, cats:[], products:{}, questions:{}, notes:{}, audit:[], users:{},
+  settings:{ fyStart:4, weekStart:1, minStock:10, allowFuture:false, histEdit:'sameDay',
+             pwStore:'', pwAm:'', pwMgmt:'', pwAdmin:'', adminId:'admin', mgmtId:'management' },
+  session:null, view:'home', period:'FTD', asOf:'', drill:null, tab:'', sort:{k:'ty',d:-1},
+  filters:{ region:'ALL', am:'ALL', type:'ALL', status:'ALL', q:'' },
+  page:1, calMonth:''
+};
+
+/* ---------------- date helpers (India) ---------------- */
+const ISO = new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'});
+function todayISO(){ return ISO.format(new Date()); }
+function d2(n){ return String(n).padStart(2,'0'); }
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmt(iso){ if(!iso) return '—'; const p=iso.split('-'); return p[2]+'-'+MON[+p[1]-1]+'-'+p[0]; }
+function fmtShort(iso){ const p=iso.split('-'); return p[2]+' '+MON[+p[1]-1]; }
+function parse(iso){ const p=iso.split('-').map(Number); return new Date(Date.UTC(p[0],p[1]-1,p[2])); }
+function toISO(d){ return d.getUTCFullYear()+'-'+d2(d.getUTCMonth()+1)+'-'+d2(d.getUTCDate()); }
+function addDays(iso,n){ const d=parse(iso); d.setUTCDate(d.getUTCDate()+n); return toISO(d); }
+function weekStart(iso){ const d=parse(iso); const w=d.getUTCDay(); const back=(w-state.settings.weekStart+7)%7;
+  d.setUTCDate(d.getUTCDate()-back); return toISO(d); }
+function monthStart(iso){ return iso.slice(0,7)+'-01'; }
+function monthKey(iso){ return iso.slice(0,7); }
+function fyStart(iso){ const y=+iso.slice(0,4), m=+iso.slice(5,7), s=state.settings.fyStart;
+  return (m>=s? y : y-1)+'-'+d2(s)+'-01'; }
+function fyLabel(iso){ const st=fyStart(iso); const y=+st.slice(0,4); return 'FY '+y+'–'+String(y+1).slice(2); }
+function daysBetween(a,b){ return Math.round((parse(b)-parse(a))/86400000); }
+function nowStamp(){ const d=new Date(); return new Intl.DateTimeFormat('en-GB',{timeZone:TZ,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(d); }
+function monthsInRange(from,to){ const out=[]; let y=+from.slice(0,4), m=+from.slice(5,7);
+  const ey=+to.slice(0,4), em=+to.slice(5,7);
+  while(y<ey || (y===ey && m<=em)){ out.push(y+'-'+d2(m)); m++; if(m>12){m=1;y++;} } return out; }
+
+function periodRange(period,asOf){
+  if(period==='FTD') return [asOf,asOf];
+  if(period==='WTD') return [weekStart(asOf),asOf];
+  if(period==='MTD') return [monthStart(asOf),asOf];
+  return [fyStart(asOf),asOf]; // YTD
+}
+
+/* ---------------- number helpers ---------------- */
+function N(v){ const n=Number(v); return isFinite(n)?n:0; }
+function int(v){ return Math.round(N(v)); }
+function inr(v){ const n=N(v);
+  if(Math.abs(n)>=10000000) return '₹'+(n/10000000).toFixed(2)+' Cr';
+  if(Math.abs(n)>=100000) return '₹'+(n/100000).toFixed(2)+' L';
+  if(Math.abs(n)>=1000) return '₹'+(n/1000).toFixed(1)+'K';
+  return '₹'+Math.round(n);
+}
+function inrFull(v){ return '₹'+Math.round(N(v)).toLocaleString('en-IN'); }
+function pct1(v){ return (Math.round(v*10)/10).toFixed(1)+'%'; }
+function sgn(v){ return (v>0?'+':'')+pct1(v); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+
+async function sha(pw){
+  const salted='sbs-2026::'+pw;
+  try{ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salted));
+    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+  catch(e){ let h1=0x811c9dc5,h2=0x1000193;
+    for(let i=0;i<salted.length;i++){ h1=(h1^salted.charCodeAt(i))>>>0; h1=Math.imul(h1,16777619)>>>0;
+      h2=Math.imul(h2^salted.charCodeAt(i),2654435761)>>>0; }
+    return 'fb'+h1.toString(16).padStart(8,'0')+h2.toString(16).padStart(8,'0'); }
+}
+
+/* ---------------- store master accessors ---------------- */
+function allStores(){ return Object.values(state.stores).sort((a,b)=>
+  (a.region+a.storeId).localeCompare(b.region+b.storeId)); }
+function activeStores(){ return allStores().filter(s=>s.active!==false); }
+function storeById(id){ return state.stores[id]; }
+function regions(){ return [...new Set(activeStores().map(s=>s.region))].sort(); }
+function ams(){ return [...new Set(activeStores().map(s=>s.am))].sort(); }
+function amRegion(am){ const s=activeStores().find(x=>x.am===am); return s?s.region:''; }
+function storesFor(sess){
+  if(!sess) return [];
+  if(sess.role==='store') return activeStores().filter(s=>s.storeId===sess.storeId);
+  if(sess.role==='am') return activeStores().filter(s=>s.am===sess.am);
+  return activeStores();
+}
+function scopeIds(sess){ return storesFor(sess).map(s=>s.storeId); }
+
+/* ---------------- data access ---------------- */
+function dsrKey(sid,date){ return sid+'__'+date; }
+function getDSR(sid,date){ return state.dsr[dsrKey(sid,date)]; }
+function dsrIn(ids,from,to){
+  const set=new Set(ids); const out=[];
+  for(const k in state.dsr){ const r=state.dsr[k];
+    if(set.has(r.storeId) && r.date>=from && r.date<=to) out.push(r); }
+  return out.sort((a,b)=> a.date<b.date?-1:1);
+}
+/* Monthly rollups keep YTD cheap: 108 stores x 12 months instead of 39,000 daily docs */
+function rollIn(ids,from,to){
+  const set=new Set(ids), mk=monthsInRange(from,to), out=[];
+  const partialStart = from!==monthStart(from), partialEnd = to!==monthEnd(to);
+  for(const m of mk){
+    const full = (m>monthKey(from) || !partialStart) && (m<monthKey(to) || !partialEnd);
+    if(full){ for(const id of set){ const r=state.monthly[id+'__'+m]; if(r) out.push(r); } }
+    else { const f=(m===monthKey(from))?from:m+'-01', t=(m===monthKey(to))?to:monthEnd(m+'-01');
+      for(const r of dsrIn([...set],f,t)) out.push(r); }
+  }
+  return out;
+}
+function monthEnd(iso){ const y=+iso.slice(0,4), m=+iso.slice(5,7);
+  const d=new Date(Date.UTC(y,m,0)); return toISO(d); }
+
+/* ---------------- aggregation ---------------- */
+function agg(rows){
+  const a={ly:0,target:0,ty:0,qty:0,sQty:0,sVal:0,n:0};
+  for(const r of rows){ a.ly+=N(r.ly); a.target+=N(r.target); a.ty+=N(r.ty);
+    a.qty+=N(r.qty); a.sQty+=N(r.sQty); a.sVal+=N(r.sVal); a.n+=N(r.days||1); }
+  a.ach = a.target>0 ? a.ty/a.target*100 : null;
+  a.growth = a.ly>0 ? (a.ty-a.ly)/a.ly*100 : null;
+  a.sValPct = a.ty>0 ? a.sVal/a.ty*100 : null;
+  a.sQtyPct = a.qty>0 ? a.sQty/a.qty*100 : null;
+  a.asp = a.sQty>0 ? a.sVal/a.sQty : null;
+  return a;
+}
+function aggFor(ids,period,asOf){
+  const [f,t]=periodRange(period,asOf);
+  return agg(period==='YTD'? rollIn(ids,f,t) : dsrIn(ids,f,t));
+}
+function statusOf(a){
+  if(a.target<=0 && a.ty<=0) return {t:'NO DATA',c:'p-m'};
+  if(a.ach===null) return {t:'NO TARGET',c:'p-m'};
+  if(a.ach>=100) return {t:'ACHIEVED',c:'p-g'};
+  if(a.ach>=90) return {t:'CLOSE',c:'p-w'};
+  return {t:'NEEDS ACTION',c:'p-r'};
+}
+function achCls(a){ if(a.ach===null) return 'm'; return a.ach>=100?'g':(a.ach>=90?'w':'r'); }
+function grCls(v){ if(v===null) return 'm'; return v>0?'g':(v<0?'r':''); }
+function pv(v,f){ return v===null? '<span class="m">N/A</span>' : f(v); }
+/* ==================== DATABASE ==================== */
+const C = { st:'sbs_stores', dsr:'sbs_dsr', mon:'sbs_monthly', stk:'sbs_stock', cat:'sbs_cats',
+            prd:'sbs_products', qa:'sbs_qa', ntf:'sbs_notifs', aud:'sbs_audit', set:'sbs_settings' };
+
+const DB = {
+  fs:null, db:null,
+  blob(){ return { stores:state.stores, dsr:state.dsr, monthly:state.monthly, stock:state.stock,
+    cats:state.cats, products:state.products, questions:state.questions, notes:state.notes,
+    audit:state.audit.slice(0,300), settings:state.settings }; },
+  saveLocal(){ if(state.mode==='local') SS.set(LS.local, JSON.stringify(DB.blob())); },
+  loadLocal(){ try{ const b=JSON.parse(SS.get(LS.local)||'{}');
+      ['stores','dsr','monthly','stock','products','questions','notes'].forEach(k=>{ if(b[k]) state[k]=b[k]; });
+      if(b.cats) state.cats=b.cats; if(b.audit) state.audit=b.audit;
+      if(b.settings) state.settings=Object.assign(state.settings,b.settings);
+    }catch(e){} },
+
+  async init(){
+    let raw = SS.get(LS.cfg); if(!raw && FB_CFG.apiKey) raw=JSON.stringify(FB_CFG);
+    if(!raw){ state.mode='local'; DB.loadLocal(); return; }
+    try{
+      const cfg=JSON.parse(raw);
+      const [am,fs] = await Promise.all([
+        import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+        import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js')]);
+      const app = am.initializeApp(cfg,'sbs');
+      try{
+        const au = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
+        const auth = au.getAuth(app);
+        await new Promise(res=>{ au.onAuthStateChanged(auth,u=>{ if(u) res(); });
+          au.signInAnonymously(auth).catch(()=>res()); setTimeout(res,7000); });
+      }catch(e){ console.warn('anon auth:',e&&e.message); }
+      DB.fs = fs;
+      try{ DB.db = fs.initializeFirestore(app,{ localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() }) }); }
+      catch(e){ DB.db = fs.getFirestore(app); }
+      state.mode='cloud';
+      await DB.cloudLoad();
+    }catch(e){ console.error('cloud init failed',e); state.mode='local'; DB.loadLocal(); }
+  },
+
+  async cloudLoad(){
+    const F=DB.fs, db=DB.db;
+    const sSnap = await F.getDoc(F.doc(db,C.set,'main'));
+    if(sSnap.exists()) state.settings=Object.assign(state.settings,sSnap.data());
+
+    const stSnap = await F.getDocs(F.collection(db,C.st));
+    stSnap.forEach(d=> state.stores[d.id]=d.data());
+    if(!stSnap.size) await DB.seedStores();
+
+    const cSnap = await F.getDoc(F.doc(db,C.cat,'list'));
+    state.cats = cSnap.exists()? (cSnap.data().items||[]) : DEFAULT_CATS.slice();
+    if(!cSnap.exists()) await F.setDoc(F.doc(db,C.cat,'list'),{items:state.cats});
+
+    /* Live listeners are bounded so daily reads stay flat as years of data build up:
+       daily rows only for the last two months, plus the small monthly rollups. */
+    const since = monthStart(addDays(todayISO(),-40));
+    F.onSnapshot(F.query(F.collection(db,C.dsr), F.where('date','>=',since)), snap=>{
+      snap.docChanges().forEach(ch=>{ if(ch.type==='removed') delete state.dsr[ch.doc.id];
+        else state.dsr[ch.doc.id]=ch.doc.data(); }); if(state.ready) render(); });
+    F.onSnapshot(F.collection(db,C.mon), snap=>{
+      snap.docChanges().forEach(ch=>{ if(ch.type==='removed') delete state.monthly[ch.doc.id];
+        else state.monthly[ch.doc.id]=ch.doc.data(); }); if(state.ready) render(); });
+    F.onSnapshot(F.collection(db,C.st), snap=>{
+      snap.docChanges().forEach(ch=>{ state.stores[ch.doc.id]=ch.doc.data(); }); if(state.ready) render(); });
+    F.onSnapshot(F.collection(db,C.stk), snap=>{
+      snap.docChanges().forEach(ch=>{ if(ch.type==='removed') delete state.stock[ch.doc.id];
+        else state.stock[ch.doc.id]=ch.doc.data(); }); if(state.ready) render(); });
+    F.onSnapshot(F.collection(db,C.prd), snap=>{
+      snap.docChanges().forEach(ch=>{ if(ch.type==='removed') delete state.products[ch.doc.id];
+        else state.products[ch.doc.id]=ch.doc.data(); }); if(state.ready) render(); });
+    F.onSnapshot(F.query(F.collection(db,C.qa),F.orderBy('tsSort','desc'),F.limit(300)), snap=>{
+      state.questions={}; snap.forEach(d=> state.questions[d.id]=d.data()); if(state.ready) render(); });
+    F.onSnapshot(F.query(F.collection(db,C.ntf),F.orderBy('tsSort','desc'),F.limit(120)), snap=>{
+      state.notes={}; snap.forEach(d=> state.notes[d.id]=d.data()); if(state.ready) render(); });
+    F.onSnapshot(F.query(F.collection(db,C.aud),F.orderBy('tsSort','desc'),F.limit(400)), snap=>{
+      state.audit=[]; snap.forEach(d=> state.audit.push(d.data())); if(state.ready) render(); });
+  },
+
+  async seedStores(){
+    for(const [id,st,rg,am,ty,sq,ir] of STORE_SEED){
+      state.stores[id]={ storeId:id, state:st, region:rg, am:am, storeType:ty,
+        sqft:sq, irod:ir, active:true };
+    }
+    if(state.mode==='cloud'){
+      const F=DB.fs, db=DB.db; let b=F.writeBatch(db), n=0;
+      for(const id in state.stores){ b.set(F.doc(db,C.st,id), state.stores[id]); n++;
+        if(n%400===0){ await b.commit(); b=F.writeBatch(db); } }
+      await b.commit();
+    } else DB.saveLocal();
+  },
+
+  async put(coll,id,data){
+    if(state.mode==='cloud'){ await DB.fs.setDoc(DB.fs.doc(DB.db,coll,id), data, {merge:true}); }
+    else DB.saveLocal();
+  },
+  async del(coll,id){
+    if(state.mode==='cloud'){ await DB.fs.deleteDoc(DB.fs.doc(DB.db,coll,id)); } else DB.saveLocal();
+  },
+
+  async saveSettings(){ await DB.put(C.set,'main',state.settings); },
+  async saveCats(){ state.cats=state.cats.filter(Boolean);
+    if(state.mode==='cloud') await DB.fs.setDoc(DB.fs.doc(DB.db,C.cat,'list'),{items:state.cats});
+    else DB.saveLocal(); },
+  async saveStore(s){ state.stores[s.storeId]=s; await DB.put(C.st,s.storeId,s); },
+
+  async saveDSR(rec){
+    const k=dsrKey(rec.storeId,rec.date), old=state.dsr[k];
+    rec.month=monthKey(rec.date); rec.updatedAt=nowStamp(); rec.tsSort=Date.now();
+    state.dsr[k]=Object.assign({},old||{},rec);
+    await DB.put(C.dsr,k,state.dsr[k]);
+    await DB.rebuildMonth(rec.storeId, rec.month);
+    return old;
+  },
+  async delDSR(sid,date){
+    const k=dsrKey(sid,date); const old=state.dsr[k]; delete state.dsr[k];
+    await DB.del(C.dsr,k); await DB.rebuildMonth(sid,monthKey(date)); return old;
+  },
+  /* Rollup for one store-month, recomputed from the daily rows we hold */
+  async rebuildMonth(sid,mk){
+    const from=mk+'-01', to=monthEnd(from);
+    const rows=dsrIn([sid],from,to);
+    const a=agg(rows);
+    const doc={ storeId:sid, month:mk, ly:a.ly, target:a.target, ty:a.ty, qty:a.qty,
+      sQty:a.sQty, sVal:a.sVal, days:rows.length, updatedAt:nowStamp() };
+    state.monthly[sid+'__'+mk]=doc;
+    await DB.put(C.mon, sid+'__'+mk, doc);
+  },
+  async saveStock(row){ const k=row.storeId+'__'+row.catId; row.current=N(row.opening)+N(row.received)-N(row.sold);
+    row.updatedAt=nowStamp(); state.stock[k]=row; await DB.put(C.stk,k,row); },
+  async saveProduct(p){ if(!p.id) p.id=uid(); state.products[p.id]=p; await DB.put(C.prd,p.id,p); },
+  async delProduct(id){ delete state.products[id]; await DB.del(C.prd,id); },
+  async saveQA(q){ if(!q.id) q.id=uid(); q.tsSort=q.tsSort||Date.now(); state.questions[q.id]=q; await DB.put(C.qa,q.id,q); },
+  async notify(n){ n.id=uid(); n.ts=nowStamp(); n.tsSort=Date.now(); state.notes[n.id]=n; await DB.put(C.ntf,n.id,n); },
+  async audit(action,detail,before,after){
+    const s=state.session||{};
+    const e={ id:uid(), ts:nowStamp(), tsSort:Date.now(), user:(s.name||s.role||'—'),
+      role:s.role||'—', action, detail, before:before==null?'':JSON.stringify(before),
+      after:after==null?'':JSON.stringify(after) };
+    state.audit.unshift(e); if(state.audit.length>400) state.audit.pop();
+    await DB.put(C.aud,e.id,e);
+  }
+};
+
+/* ==================== AUTH ==================== */
+let authTab='store';
+function setAuthTab(t){ authTab=t; renderAuth(); }
+
+async function needSetup(){ return !state.settings.pwAdmin; }
+
+async function doSetup(){
+  const a=$('#suAdmin').value.trim()||'admin', p=$('#suPw').value, p2=$('#suPw2').value;
+  const ps=$('#suStore').value||'54321', pa=$('#suAm').value||'12345', pm=$('#suMgmt').value||'11111';
+  if(p.length<6) return toast('Admin password needs at least 6 characters',true);
+  if(p!==p2) return toast('Passwords do not match',true);
+  state.settings.adminId=a;
+  state.settings.pwAdmin=await sha(p);
+  state.settings.pwStore=await sha(ps);
+  state.settings.pwAm=await sha(pa);
+  state.settings.pwMgmt=await sha(pm);
+  await DB.saveSettings();
+  await DB.audit('SETUP','Admin account created');
+  toast('Setup complete. Please log in.');
+  renderAuth();
+}
+
+async function login(){
+  const err=m=>{ $('#authMsg').innerHTML='<div class="alert a-red">'+m+'</div>'; };
+  if(authTab==='store'){
+    const sid=$('#lgStore').value, pw=$('#lgPw').value;
+    if(!sid) return err('Select your store.');
+    const st=storeById(sid); if(!st) return err('Store not found.');
+    const h=await sha(pw);
+    const ok = (st.pwHash && h===st.pwHash) || (!st.pwHash && h===state.settings.pwStore);
+    if(!ok) return err('Incorrect password for this store.');
+    state.session={ role:'store', storeId:sid, name:sid, am:st.am, region:st.region };
+  } else if(authTab==='am'){
+    const am=$('#lgAm').value, pw=$('#lgPw2').value;
+    if(!am) return err('Select your name.');
+    if(await sha(pw)!==state.settings.pwAm) return err('Incorrect AM password.');
+    state.session={ role:'am', am, name:am, region:amRegion(am) };
+  } else if(authTab==='mgmt'){
+    const u=$('#lgMu').value.trim(), pw=$('#lgMp').value;
+    if(u.toLowerCase()!==String(state.settings.mgmtId).toLowerCase() || await sha(pw)!==state.settings.pwMgmt)
+      return err('Incorrect management ID or password.');
+    state.session={ role:'mgmt', name:'Management' };
+  } else {
+    const u=$('#lgAu').value.trim(), pw=$('#lgAp').value;
+    if(u.toLowerCase()!==String(state.settings.adminId).toLowerCase() || await sha(pw)!==state.settings.pwAdmin)
+      return err('Incorrect admin ID or password.');
+    state.session={ role:'admin', name:'Super Admin' };
+  }
+  SS.set(LS.sess, JSON.stringify(state.session));
+  state.view='home'; state.asOf=todayISO(); state.period='FTD'; state.drill=null;
+  render();
+}
+
+function logout(){ SS.del(LS.sess); state.session=null; state.view='home'; state.drill=null;
+  authTab='store'; render(); toast('Logged out'); }
+
+/* ==================== small DOM helpers ==================== */
+function $(s){ return document.querySelector(s); }
+function $$(s){ return [...document.querySelectorAll(s)]; }
+function on(sel,ev,fn){ const e=$(sel); if(e) e.addEventListener(ev,fn); }
+function toast(msg,bad){ const h=$('#toastHost');
+  h.innerHTML='<div class="toast'+(bad?' bad':'')+'" id="toast">'+esc(msg)+'</div>';
+  clearTimeout(window.__tt); window.__tt=setTimeout(()=>h.innerHTML='',2800); }
+function openSheet(html){ $('#modal').innerHTML='<div class="ovl" onclick="if(event.target===this)closeSheet()"><div class="sheet">'+html+'</div></div>'; }
+function closeSheet(){ $('#modal').innerHTML=''; }
+/* ==================== AUTH SCREENS ==================== */
+function modeFoot(){
+  return '<div class="foot">'+(state.mode==='cloud'?'☁ Cloud database connected':'▣ Local mode — this device only')+
+    ' · <a href="#" id="cloudLink">Cloud setup</a></div>';
+}
+function bindCloud(){ on('#cloudLink','click',e=>{ e.preventDefault(); cloudSheet(); }); }
+
+function cloudSheet(){
+  const cfg=SS.get(LS.cfg)||'';
+  openSheet('<div class="sh"><h3>Cloud database</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+    '<div class="alert '+(state.mode==='cloud'?'a-green':'a-warn')+'">'+
+    (state.mode==='cloud'?'Connected. All stores share one live database.':'Not connected. Paste your Firebase config below.')+'</div>'+
+    '<div class="field"><label class="lb">Firebase configuration</label>'+
+    '<textarea class="inp" id="fbc" rows="8">'+esc(cfg)+'</textarea></div>'+
+    '<button class="btn" id="fbSave">Save and connect</button>'+
+    (cfg?'<div style="height:8px"></div><button class="btn ghost" id="fbClr">Disconnect</button>':''));
+  on('#fbSave','click',()=>{
+    const raw=$('#fbc').value.trim(); if(!raw) return toast('Paste the config first',true);
+    let c; try{ c=JSON.parse(raw.replace(/^[\s\S]*?firebaseConfig\s*=\s*/,'').replace(/;\s*$/,'')
+      .replace(/([{,]\s*)([A-Za-z0-9_]+)\s*:/g,'$1"$2":').replace(/'/g,'"').replace(/,(\s*})/g,'$1')); }
+    catch(e){ return toast('Could not read that config',true); }
+    if(!c.apiKey||!c.projectId) return toast('Config needs apiKey and projectId',true);
+    SS.set(LS.cfg,JSON.stringify(c)); toast('Connecting…'); setTimeout(()=>location.reload(),700);
+  });
+  on('#fbClr','click',()=>{ if(confirm('Disconnect and use this device only?')){ SS.del(LS.cfg); location.reload(); } });
+}
+
+function renderAuth(){
+  $('#shell').classList.add('hide'); $('#auth').classList.remove('hide');
+  if(!state.settings.pwAdmin){ authSetup(); return; }
+  const rg = regions();
+  const storeOpts = activeStores().map(s=>'<option value="'+esc(s.storeId)+'">'+esc(s.storeId)+' · '+esc(s.region)+'</option>').join('');
+  $('#auth').innerHTML =
+  '<div class="acard">'+
+    '<div class="brand"><div class="btile">SB</div><div>'+
+      '<div class="bt1">STYLE BAAZAR SAREES</div>'+
+      '<div class="bt2">DSR • Sales • Stock • VM</div></div></div>'+
+    '<div class="tagline">Sell Better. Learn Faster. Perform Stronger.</div>'+
+    '<div class="rtabs">'+
+      ['store|Store','am|AM','mgmt|Mgmt','admin|Admin'].map(x=>{const[v,l]=x.split('|');
+        return '<button class="'+(authTab===v?'on':'')+'" onclick="setAuthTab(\''+v+'\')">'+l+'</button>';}).join('')+
+    '</div>'+
+    '<div id="authMsg"></div>'+
+    (authTab==='store'?
+      '<div class="field"><label class="lb">Select your store</label><select class="inp" id="lgStore">'+storeOpts+'</select></div>'+
+      '<div class="field"><label class="lb">Password</label><input class="inp" id="lgPw" type="password" placeholder="••••••"></div>'
+     :authTab==='am'?
+      '<div class="field"><label class="lb">Select your name</label><select class="inp" id="lgAm">'+
+        ams().map(a=>'<option>'+esc(a)+'</option>').join('')+'</select></div>'+
+      '<div class="field"><label class="lb">Password</label><input class="inp" id="lgPw2" type="password" placeholder="••••••"></div>'
+     :authTab==='mgmt'?
+      '<div class="field"><label class="lb">Management ID</label><input class="inp" id="lgMu" placeholder="'+esc(state.settings.mgmtId)+'"></div>'+
+      '<div class="field"><label class="lb">Password</label><input class="inp" id="lgMp" type="password"></div>'
+     :
+      '<div class="field"><label class="lb">Admin ID</label><input class="inp" id="lgAu" placeholder="'+esc(state.settings.adminId)+'"></div>'+
+      '<div class="field"><label class="lb">Password</label><input class="inp" id="lgAp" type="password"></div>')+
+    '<button class="btn" id="lgGo">Log in</button>'+
+    '<div class="foot">'+activeStores().length+' stores · '+rg.length+' regions · '+ams().length+' AMs</div>'+
+    modeFoot()+
+  '</div>';
+  on('#lgGo','click',login);
+  $$('#auth input').forEach(i=> i.addEventListener('keydown',e=>{ if(e.key==='Enter') login(); }));
+  bindCloud();
+}
+
+function authSetup(){
+  $('#auth').innerHTML=
+  '<div class="acard">'+
+    '<div class="brand"><div class="btile">SB</div><div>'+
+      '<div class="bt1">First-time setup</div><div class="bt2">Style Baazar Sarees</div></div></div>'+
+    '<div class="alert a-info">Set the passwords once. They are stored as irreversible hashes — nobody can read them from the page source. You can change any of them later in Admin → Settings.</div>'+
+    '<div class="field"><label class="lb">Admin ID</label><input class="inp" id="suAdmin" value="admin"></div>'+
+    '<div class="field"><label class="lb">Admin password (min 6)</label><input class="inp" id="suPw" type="password"></div>'+
+    '<div class="field"><label class="lb">Confirm admin password</label><input class="inp" id="suPw2" type="password"></div>'+
+    '<div class="hr"></div>'+
+    '<div class="field"><label class="lb">Store user password</label><input class="inp" id="suStore" value="54321"></div>'+
+    '<div class="field"><label class="lb">AM password</label><input class="inp" id="suAm" value="12345"></div>'+
+    '<div class="field"><label class="lb">Management password</label><input class="inp" id="suMgmt" value="11111"></div>'+
+    '<button class="btn" id="suGo">Create accounts and start</button>'+
+    modeFoot()+
+  '</div>';
+  on('#suGo','click',doSetup); bindCloud();
+}
+
+/* ==================== SHELL ==================== */
+const ICON={
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+  dsr:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  box:'<path d="M3 8 12 3l9 5v8l-9 5-9-5Z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+  book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3Z"/><path d="M18 7h2v13H7"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.2 2.7-5 6-5s6 1.8 6 5"/><path d="M17 11a3 3 0 1 0-1.5-5.6"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  bell:'<path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10 21h4"/>',
+  cog:'<circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 7 19.4a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H1a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 2.6 7a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 8 3.6V3a2 2 0 1 1 4 0v.1A1.7 1.7 0 0 0 15 4.6"/>',
+  qa:'<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/><path d="M9.5 9a2.5 2.5 0 1 1 3 2.4V13"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'
+};
+function navFor(role){
+  if(role==='store') return [['home','Home','home'],['dsr','DSR','dsr'],['sarees','Sarees','chart'],
+    ['stock','Stock','box'],['learn','Learn','book'],['history','History','clock']];
+  if(role==='am') return [['home','Dashboard','home'],['perf','Stores','grid'],['pending','Pending','check'],
+    ['sarees','Sarees','chart'],['stock','Stock','box'],['learn','Learn','book']];
+  if(role==='mgmt') return [['home','Control','home'],['region','Region','grid'],['am','AM','users'],
+    ['perf','Stores','list'],['pending','DSR','check'],['sarees','Sarees','chart']];
+  return [['home','Control','home'],['region','Region','grid'],['am','AM','users'],['perf','Stores','list'],
+    ['pending','DSR','check'],['sarees','Sarees','chart'],['stock','Stock','box'],['learn','Learn','book'],
+    ['qa','Q&A','qa'],['master','Masters','cog'],['audit','Audit','list'],['settings','Settings','cog']];
+}
+function renderNav(){
+  const items=navFor(state.session.role);
+  const pend = state.session.role==='admin' ? Object.values(state.questions).filter(q=>q.status!=='Answered').length : 0;
+  $('#nav').innerHTML = items.map(([v,l,ic])=>
+    '<button class="'+(state.view===v?'on':'')+'" onclick="go(\''+v+'\')">'+
+    '<span class="rel"><svg viewBox="0 0 24 24">'+ICON[ic]+'</svg>'+
+    (v==='qa'&&pend?'<span class="badge">'+pend+'</span>':'')+'</span>'+
+    '<span>'+l+'</span><span class="nd"></span></button>').join('');
+}
+function go(v){ state.view=v; state.drill=null; state.page=1; render(); window.scrollTo(0,0); }
+
+function headerFor(){
+  const s=state.session;
+  if(s.role==='store'){ const st=storeById(s.storeId);
+    $('#tT').textContent=s.storeId;
+    $('#tS').textContent='AM: '+st.am+' · '+st.region+' · '+st.storeType; }
+  else if(s.role==='am'){ $('#tT').textContent=s.am; $('#tS').textContent=s.region+' · '+storesFor(s).length+' stores'; }
+  else if(s.role==='mgmt'){ $('#tT').textContent='Management'; $('#tS').textContent=activeStores().length+' stores · '+regions().length+' regions'; }
+  else { $('#tT').textContent='Control Tower'; $('#tS').textContent='Super Admin · '+activeStores().length+' stores'; }
+}
+
+/* ==================== STORE USER ==================== */
+function kpiCard(label,sub,a,tap){
+  return '<div class="kpi '+(tap?'tap':'')+'"'+(tap?' onclick="'+tap+'"':'')+'>'+
+    '<div class="k">'+label+'</div>'+
+    '<div class="v num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</div>'+
+    '<div class="s num">'+inr(a.ty)+' / '+inr(a.target)+'</div>'+
+    '<div class="s">Gr '+(a.growth===null?'N/A':'<b class="'+grCls(a.growth)+'">'+sgn(a.growth)+'</b>')+' · '+sub+'</div></div>';
+}
+function periodBlock(ids){
+  const P=['FTD','WTD','MTD','YTD'], L={FTD:'For the day',WTD:'Week till date',MTD:'Month till date',YTD:fyLabel(state.asOf)};
+  return '<div class="kgrid">'+P.map(p=>{ const a=aggFor(ids,p,state.asOf);
+    return kpiCard(p,L[p],a,"drillPeriod('"+p+"')"); }).join('')+'</div>';
+}
+function drillPeriod(p){
+  const ids=scopeIds(state.session), a=aggFor(ids,p,state.asOf);
+  const [f,t]=periodRange(p,state.asOf);
+  openSheet('<div class="sh"><h3>'+p+' detail</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   '<div class="note" style="margin-bottom:10px">'+fmt(f)+' → '+fmt(t)+'</div>'+
+   '<div class="kv"><span>LY Sale</span><b class="num">'+inrFull(a.ly)+'</b></div>'+
+   '<div class="kv"><span>TY Target</span><b class="num">'+inrFull(a.target)+'</b></div>'+
+   '<div class="kv"><span>TY Sale</span><b class="num">'+inrFull(a.ty)+'</b></div>'+
+   '<div class="kv"><span>Achievement</span><b class="num '+achCls(a)+'">'+(a.ach===null?'N/A':pct1(a.ach))+'</b></div>'+
+   '<div class="kv"><span>Growth vs LY</span><b class="num '+grCls(a.growth)+'">'+(a.growth===null?'N/A':sgn(a.growth))+'</b></div>'+
+   '<div class="kv"><span>Gap to target</span><b class="num '+(a.ty-a.target>=0?'g':'r')+'">'+inrFull(a.ty-a.target)+'</b></div>'+
+   '<div class="hr"></div>'+
+   '<div class="kv"><span>Total quantity</span><b class="num">'+int(a.qty)+'</b></div>'+
+   '<div class="kv"><span>Sarees quantity</span><b class="num">'+int(a.sQty)+'</b></div>'+
+   '<div class="kv"><span>Sarees value</span><b class="num">'+inrFull(a.sVal)+'</b></div>'+
+   '<div class="kv"><span>Sarees qty contribution</span><b class="num">'+(a.sQtyPct===null?'N/A':pct1(a.sQtyPct))+'</b></div>'+
+   '<div class="kv"><span>Sarees value contribution</span><b class="num">'+(a.sValPct===null?'N/A':pct1(a.sValPct))+'</b></div>'+
+   '<div class="kv"><span>Avg sarees selling price</span><b class="num">'+(a.asp===null?'N/A':inrFull(a.asp))+'</b></div>');
+}
+
+function storeHome(){
+  const s=state.session, st=storeById(s.storeId), ids=[s.storeId];
+  const today=getDSR(s.storeId,state.asOf);
+  const hr=new Date().getHours();
+  const greet = hr<12?'Good morning':(hr<17?'Good afternoon':'Good evening');
+  const low = lowStockFor(s.storeId);
+  const a=aggFor(ids,'MTD',state.asOf);
+  return '<div class="sec"><div class="card pad">'+
+      '<div style="font-size:18px;font-weight:800;letter-spacing:-.02em">'+greet+'</div>'+
+      '<div class="note" style="margin-top:2px">'+esc(st.storeId)+' · '+esc(st.storeType)+' · '+int(st.sqft)+' sq ft · I-Rod '+int(st.irod)+'</div>'+
+      '<div class="note">AM: '+esc(st.am)+' · Region '+esc(st.region)+' · '+esc(st.state)+'</div>'+
+    '</div></div>'+
+    (today? '<div class="alert a-green">Today\'s DSR submitted · Sale '+inr(today.ty)+' · Ach '+
+        (N(today.target)>0?pct1(today.ty/today.target*100):'—')+'</div>'
+          : '<div class="alert a-warn">Today\'s DSR is pending. It takes about 30 seconds.</div>')+
+    (low.length? '<div class="alert a-red">'+low.length+' saree '+(low.length===1?'category needs':'categories need')+
+        ' replenishment: '+low.slice(0,3).map(x=>esc(x.cat)).join(', ')+(low.length>3?'…':'')+'</div>':'')+
+    '<div class="sec"><div class="sech"><span class="sect">Performance · '+fmt(state.asOf)+'</span></div>'+
+      periodBlock(ids)+'</div>'+
+    '<div class="sec"><div class="sech"><span class="sect">Sarees contribution · MTD</span></div>'+
+      '<div class="r3">'+
+        '<div class="mini"><div class="k">Sarees value</div><div class="v num">'+inr(a.sVal)+'</div></div>'+
+        '<div class="mini"><div class="k">Value contrib</div><div class="v num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</div></div>'+
+        '<div class="mini"><div class="k">Qty contrib</div><div class="v num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</div></div>'+
+      '</div></div>'+
+    '<div class="sec"><button class="btn gold" onclick="go(\'dsr\')">'+(today?'Update today\'s DSR':'Submit today\'s DSR')+'</button>'+
+      '<div style="height:8px"></div><button class="btn ghost" onclick="go(\'history\')">View my history</button></div>'+
+    chartBox('cTrend','Daily sale vs target — this month');
+}
+
+function storeDSR(){
+  const s=state.session, sid=s.storeId, st=storeById(sid);
+  const date=state.dsrDate||state.asOf;
+  const ex=getDSR(sid,date);
+  const canEdit = editAllowed(date);
+  return '<div class="sec"><div class="sech"><span class="sect">Today\'s DSR</span>'+
+      '<span class="chip">'+esc(sid)+'</span></div>'+
+    '<div class="card pad">'+
+      '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+        '<div class="field" style="margin:0"><label class="lb">Date</label>'+
+          '<input class="inp" id="dDate" type="date" value="'+date+'" min="'+fyStart(todayISO())+'" max="'+
+            (state.settings.allowFuture?'':todayISO())+'"></div>'+
+        '<div class="field" style="margin:0"><label class="lb">Store type</label>'+
+          '<input class="inp" value="'+esc(st.storeType)+'" disabled></div>'+
+      '</div>'+
+      (ex? '<div class="alert a-info" style="margin-top:12px">DSR already submitted for '+fmt(date)+
+           (canEdit?'. You can update it below.':'. Editing this date needs Admin permission.')+'</div>':'')+
+      '<div class="hr"></div>'+
+      '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+        numField('dLy','LY Sale (₹)',ex?ex.ly:'')+
+        numField('dTgt','TY Target (₹)',ex?ex.target:'')+
+      '</div>'+
+      numField('dTy','TY Sale (₹)',ex?ex.ty:'',true)+
+      '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+        numField('dQty','Store total qty',ex?ex.qty:'')+
+        numField('dSq','Sarees qty',ex?ex.sQty:'')+
+      '</div>'+
+      numField('dSv','Sarees value (₹)',ex?ex.sVal:'')+
+      '<div class="field"><label class="lb">Remarks (optional)</label>'+
+        '<input class="inp" id="dRm" value="'+esc(ex?ex.remarks:'')+'" placeholder="Short note"></div>'+
+      '<div id="dCalc" class="alert a-info" style="display:none"></div>'+
+      (canEdit? '<button class="btn" id="dSave">'+(ex?'Update DSR':'Submit DSR')+'</button>'+
+        '<div style="height:8px"></div><button class="btn ghost" id="dReset">Reset</button>'
+        : '<div class="alert a-warn">This date is locked. Contact your Admin to correct it.</div>')+
+    '</div></div>';
+}
+function numField(id,label,val,big){
+  return '<div class="field"><label class="lb">'+label+'</label>'+
+    '<input class="inp num" id="'+id+'" type="number" inputmode="numeric" min="0" step="1" value="'+
+    (val===''||val==null?'':int(val))+'"'+(big?' style="font-size:19px;font-weight:800"':'')+'></div>';
+}
+function editAllowed(date){
+  const s=state.session;
+  if(s.role==='admin') return true;
+  if(s.role!=='store') return false;
+  if(state.settings.histEdit==='any') return true;
+  return date===todayISO();
+}
+function bindDSR(){
+  const s=state.session, sid=s.storeId;
+  const calc=()=>{
+    const ty=N($('#dTy').value), tg=N($('#dTgt').value), ly=N($('#dLy').value);
+    const q=N($('#dQty').value), sq=N($('#dSq').value), sv=N($('#dSv').value);
+    if(!$('#dTy').value && !$('#dTgt').value){ $('#dCalc').style.display='none'; return; }
+    const ach = tg>0? ty/tg*100 : null, gr = ly>0? (ty-ly)/ly*100 : null;
+    const vc = ty>0? sv/ty*100 : null, qc = q>0? sq/q*100 : null;
+    $('#dCalc').style.display='block';
+    $('#dCalc').innerHTML='Achievement <b>'+(ach===null?'N/A':pct1(ach))+'</b> · Growth <b>'+
+      (gr===null?'N/A':sgn(gr))+'</b> · Sarees value <b>'+(vc===null?'N/A':pct1(vc))+
+      '</b> · Sarees qty <b>'+(qc===null?'N/A':pct1(qc))+'</b>';
+  };
+  ['dLy','dTgt','dTy','dQty','dSq','dSv'].forEach(id=> on('#'+id,'input',calc));
+  calc();
+  on('#dDate','change',e=>{ state.dsrDate=e.target.value; render(); });
+  on('#dReset','click',()=>{ state.dsrDate=state.asOf; render(); });
+  on('#dSave','click',async()=>{
+    const date=$('#dDate').value;
+    const ly=N($('#dLy').value), tg=N($('#dTgt').value), ty=N($('#dTy').value);
+    const qty=N($('#dQty').value), sq=N($('#dSq').value), sv=N($('#dSv').value);
+    if(!date) return toast('Choose a date',true);
+    if(!state.settings.allowFuture && date>todayISO()) return toast('Future dates are not allowed',true);
+    if([ly,tg,ty,qty,sq,sv].some(v=>v<0)) return toast('Values cannot be negative',true);
+    if($('#dTy').value==='' || $('#dTgt').value==='') return toast('Enter TY Target and TY Sale',true);
+    if(sq>qty && qty>0) return toast('Sarees qty cannot exceed store total qty',true);
+    if(sv>ty && ty>0) return toast('Sarees value cannot exceed total sale',true);
+    if(!editAllowed(date)) return toast('This date is locked',true);
+    const b=$('#dSave'); b.disabled=true; b.innerHTML='<span class="spin"></span>Saving…';
+    try{
+      const old=await DB.saveDSR({ storeId:sid, date, ly, target:tg, ty, qty, sQty:sq, sVal:sv,
+        remarks:$('#dRm').value.trim(), updatedBy:(state.session.name||'store') });
+      await DB.audit(old?'DSR_EDIT':'DSR_CREATE', sid+' · '+fmt(date),
+        old?{ly:old.ly,target:old.target,ty:old.ty}:null, {ly,target:tg,ty});
+      state.dsrDate=null;
+      dsrSuccess(sid,date);
+    }catch(e){ console.error(e); toast('Could not save: '+e.message,true);
+      b.disabled=false; b.textContent='Submit DSR'; }
+  });
+}
+function dsrSuccess(sid,date){
+  const r=getDSR(sid,date), ach=N(r.target)>0? r.ty/r.target*100:null;
+  const vc=N(r.ty)>0? r.sVal/r.ty*100:null;
+  openSheet('<div class="sh"><h3>DSR submitted successfully</h3><button class="x" onclick="closeSheet();render()">✕</button></div>'+
+   '<div class="alert a-green">'+esc(sid)+' · '+fmt(date)+'</div>'+
+   '<div class="kv"><span>TY Sale</span><b class="num">'+inrFull(r.ty)+'</b></div>'+
+   '<div class="kv"><span>Target</span><b class="num">'+inrFull(r.target)+'</b></div>'+
+   '<div class="kv"><span>Achievement</span><b class="num">'+(ach===null?'N/A':pct1(ach))+'</b></div>'+
+   '<div class="kv"><span>Sarees value</span><b class="num">'+inrFull(r.sVal)+'</b></div>'+
+   '<div class="kv"><span>Sarees contribution</span><b class="num">'+(vc===null?'N/A':pct1(vc))+'</b></div>'+
+   '<div style="height:14px"></div>'+
+   '<button class="btn" onclick="closeSheet();go(\'home\')">View dashboard</button>'+
+   '<div style="height:8px"></div>'+
+   '<button class="btn ghost" onclick="closeSheet();go(\'history\')">View history</button>');
+}
+
+/* ---------------- SAREES ---------------- */
+function sareesScreen(){
+  const ids=scopeIds(state.session);
+  const a=aggFor(ids,state.period,state.asOf);
+  return periodBar()+
+   '<div class="sec"><div class="kgrid">'+
+     '<div class="kpi hero"><div class="k">Sarees sale · '+state.period+'</div>'+
+       '<div class="v num">'+inr(a.sVal)+'</div><div class="s num">'+int(a.sQty)+' pcs · ASP '+(a.asp===null?'—':inrFull(a.asp))+'</div></div>'+
+     '<div class="kpi"><div class="k">Value contribution</div><div class="v num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</div>'+
+       '<div class="s num">of '+inr(a.ty)+' total</div></div>'+
+     '<div class="kpi"><div class="k">Qty contribution</div><div class="v num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</div>'+
+       '<div class="s num">of '+int(a.qty)+' pcs</div></div>'+
+   '</div></div>'+
+   chartBox('cSarees','Sarees value vs other sales — daily')+
+   chartBox('cSqty','Sarees quantity trend')+
+   (state.session.role==='store'? '' :
+     '<div class="sec"><div class="sech"><span class="sect">Sarees by store</span></div>'+sareesTable()+'</div>');
+}
+function sareesTable(){
+  const [f,t]=periodRange(state.period,state.asOf);
+  const rows=storesFor(state.session).map(s=>{
+    const a=agg(state.period==='YTD'? rollIn([s.storeId],f,t) : dsrIn([s.storeId],f,t));
+    return {s,a};
+  }).filter(r=>r.a.sVal>0||r.a.ty>0).sort((x,y)=>y.a.sVal-x.a.sVal);
+  if(!rows.length) return '<div class="card"><div class="empty">No sarees data in this period yet.</div></div>';
+  return '<div class="tw"><table><thead><tr><th>Store</th><th>Sarees ₹</th><th>Qty</th><th>Val %</th><th>Qty %</th><th>ASP</th></tr></thead><tbody>'+
+    rows.map(r=>'<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span></td>'+
+      '<td class="num">'+inr(r.a.sVal)+'</td><td class="num">'+int(r.a.sQty)+'</td>'+
+      '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
+      '<td class="num">'+(r.a.sQtyPct===null?'—':pct1(r.a.sQtyPct))+'</td>'+
+      '<td class="num">'+(r.a.asp===null?'—':inrFull(r.a.asp))+'</td></tr>').join('')+
+    '</tbody></table></div>';
+}
+
+/* ---------------- STOCK ---------------- */
+function stockRows(sid){
+  return state.cats.map(c=>{
+    const k=sid+'__'+c, r=state.stock[k];
+    return r||{storeId:sid,catId:c,opening:0,received:0,sold:0,current:0,value:0,updatedAt:''};
+  });
+}
+function lowStockFor(sid){
+  const min=N(state.settings.minStock);
+  return stockRows(sid).filter(r=>N(r.current)<min && (N(r.opening)+N(r.received)+N(r.sold))>0)
+    .map(r=>({cat:r.catId,current:N(r.current)}));
+}
+function stockScreen(){
+  const s=state.session;
+  if(s.role==='store') return stockStore(s.storeId);
+  const stores=storesFor(s);
+  const min=N(state.settings.minStock);
+  const rows=stores.map(st=>{ const rs=stockRows(st.storeId);
+    const tot=rs.reduce((x,r)=>x+N(r.current),0), val=rs.reduce((x,r)=>x+N(r.value),0);
+    const low=rs.filter(r=>N(r.current)<min && (N(r.opening)+N(r.received)+N(r.sold))>0).length;
+    return {st,tot,val,low}; }).filter(r=>r.tot>0||r.low>0);
+  return '<div class="sec"><div class="sech"><span class="sect">Sarees stock · '+stores.length+' stores</span>'+
+      '<span class="chip">Min '+min+'</span></div>'+
+    (rows.length? '<div class="tw"><table><thead><tr><th>Store</th><th>Current qty</th><th>Stock value</th><th>Low cats</th></tr></thead><tbody>'+
+      rows.sort((a,b)=>b.low-a.low).map(r=>'<tr><td><span class="lnk" onclick="stockDrill(\''+esc(r.st.storeId)+'\')">'+esc(r.st.storeId)+'</span></td>'+
+        '<td class="num">'+int(r.tot)+'</td><td class="num">'+inr(r.val)+'</td>'+
+        '<td>'+(r.low? '<span class="pill p-r">'+r.low+' low</span>':'<span class="pill p-g">OK</span>')+'</td></tr>').join('')+
+      '</tbody></table></div>' : '<div class="card"><div class="empty">No stock entered yet.</div></div>')+'</div>';
+}
+function stockDrill(sid){ state.drill=sid; state.view='stock'; render(); window.scrollTo(0,0); }
+function stockStore(sid){
+  const rows=stockRows(sid), min=N(state.settings.minStock);
+  const canEdit = state.session.role==='store' || state.session.role==='admin';
+  const tot=rows.reduce((x,r)=>x+N(r.current),0), val=rows.reduce((x,r)=>x+N(r.value),0);
+  return (state.drill? '<div class="sec"><button class="btn ghost sm" onclick="state.drill=null;render()">← All stores</button></div>':'')+
+   '<div class="sec"><div class="r3">'+
+     '<div class="mini"><div class="k">Categories</div><div class="v num">'+rows.length+'</div></div>'+
+     '<div class="mini"><div class="k">Current qty</div><div class="v num">'+int(tot)+'</div></div>'+
+     '<div class="mini"><div class="k">Stock value</div><div class="v num">'+inr(val)+'</div></div>'+
+   '</div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">'+esc(sid)+' · stock</span>'+
+     '<span class="chip">Low below '+min+'</span></div>'+
+     '<div class="tw"><table><thead><tr><th>Category</th><th>Open</th><th>Recd</th><th>Sold</th><th>Current</th><th>Value</th><th></th></tr></thead><tbody>'+
+     rows.map(r=>{ const low=N(r.current)<min && (N(r.opening)+N(r.received)+N(r.sold))>0;
+       return '<tr><td>'+esc(r.catId)+(low?' <span class="pill p-r">LOW</span>':'')+'</td>'+
+       '<td class="num">'+int(r.opening)+'</td><td class="num">'+int(r.received)+'</td>'+
+       '<td class="num">'+int(r.sold)+'</td><td class="num"><b>'+int(r.current)+'</b></td>'+
+       '<td class="num">'+inr(r.value)+'</td>'+
+       '<td>'+(canEdit?'<button class="btn xs ghost" onclick="editStock(\''+esc(sid)+'\',\''+esc(r.catId)+'\')">Edit</button>':'')+'</td></tr>'; }).join('')+
+     '</tbody></table></div>'+
+     '<div class="note" style="margin-top:8px">Current = Opening + Received − Sold</div></div>';
+}
+function editStock(sid,cat){
+  const k=sid+'__'+cat, r=state.stock[k]||{storeId:sid,catId:cat,opening:0,received:0,sold:0,value:0};
+  openSheet('<div class="sh"><h3>'+esc(cat)+'</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   '<div class="note" style="margin-bottom:10px">'+esc(sid)+'</div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+     numField('stOp','Opening stock',r.opening)+numField('stRc','Received',r.received)+'</div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+     numField('stSo','Sold',r.sold)+numField('stVa','Stock value (₹)',r.value)+'</div>'+
+   '<div class="alert a-info" id="stCur"></div>'+
+   '<button class="btn" id="stSave">Save stock</button>');
+  const upd=()=>{ const c=N($('#stOp').value)+N($('#stRc').value)-N($('#stSo').value);
+    $('#stCur').innerHTML='Current stock: <b>'+c+'</b>'+(c<N(state.settings.minStock)?' · below minimum':''); };
+  ['stOp','stRc','stSo'].forEach(i=>on('#'+i,'input',upd)); upd();
+  on('#stSave','click',async()=>{
+    const o=N($('#stOp').value),rc=N($('#stRc').value),so=N($('#stSo').value),va=N($('#stVa').value);
+    if([o,rc,so,va].some(v=>v<0)) return toast('Values cannot be negative',true);
+    await DB.saveStock({storeId:sid,catId:cat,opening:o,received:rc,sold:so,value:va});
+    await DB.audit('STOCK_UPDATE',sid+' · '+cat,{c:N(r.current)},{c:o+rc-so});
+    closeSheet(); toast('Stock updated'); render();
+  });
+}
+
+/* ---------------- LEARN / PRODUCT KNOWLEDGE ---------------- */
+function learnScreen(){
+  const ps=Object.values(state.products);
+  const q=(state.filters.q||'').toLowerCase();
+  const list=ps.filter(p=> !q || (p.name+' '+p.cat+' '+p.fabric+' '+p.origin).toLowerCase().includes(q));
+  const cats=[...new Set(ps.map(p=>p.cat))].filter(Boolean);
+  const isAdmin=state.session.role==='admin';
+  return '<div class="sec"><div class="sech"><span class="sect">Product knowledge</span>'+
+      (isAdmin?'<button class="btn xs" onclick="editProduct()">+ Add product</button>':'')+'</div>'+
+    '<input class="inp" id="pq" placeholder="Search fabric, category, product…" value="'+esc(state.filters.q||'')+'"></div>'+
+    (cats.length? '<div class="sec"><div class="seg">'+
+      ['ALL'].concat(cats).map(c=>'<button class="'+((state.tab||'ALL')===c?'on':'')+'" onclick="state.tab=\''+esc(c)+'\';render()">'+esc(c)+'</button>').join('')+
+      '</div></div>':'')+
+    '<div class="sec"><div class="r2 wide" style="gap:10px">'+
+      (list.filter(p=>!state.tab||state.tab==='ALL'||p.cat===state.tab).map(p=>productCard(p,isAdmin)).join('')
+        || '<div class="card" style="grid-column:1/-1"><div class="empty">No products added yet.'+
+           (isAdmin?' Use “Add product” to build the knowledge hub.':' Your Admin will add them soon.')+'</div></div>')+
+    '</div></div>'+
+    askBlock();
+}
+function productCard(p,isAdmin){
+  return '<div class="pcard">'+
+    (p.image? '<img src="'+esc(p.image)+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\'">':'')+
+    '<div class="pb"><h5>'+esc(p.name)+'</h5>'+
+      '<div class="note">'+esc(p.fabric||'')+(p.origin?' · '+esc(p.origin):'')+'</div>'+
+      (p.priceRange?'<div class="note">Price: '+esc(p.priceRange)+'</div>':'')+
+      (p.occasion?'<div style="margin-top:6px"><span class="chip">'+esc(p.occasion)+'</span></div>':'')+
+      '<div style="height:9px"></div>'+
+      '<button class="btn xs ghost" onclick="viewProduct(\''+p.id+'\')">Learn more</button>'+
+      (isAdmin?' <button class="btn xs ghost" onclick="editProduct(\''+p.id+'\')">Edit</button>':'')+
+    '</div></div>';
+}
+function viewProduct(id){
+  const p=state.products[id]; if(!p) return;
+  openSheet('<div class="sh"><h3>'+esc(p.name)+'</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   (p.image?'<img src="'+esc(p.image)+'" style="width:100%;border-radius:12px;margin-bottom:12px" onerror="this.style.display=\'none\'">':'')+
+   '<div class="kv"><span>Category</span><b>'+esc(p.cat||'—')+'</b></div>'+
+   '<div class="kv"><span>Fabric</span><b>'+esc(p.fabric||'—')+'</b></div>'+
+   '<div class="kv"><span>Origin</span><b>'+esc(p.origin||'—')+'</b></div>'+
+   '<div class="kv"><span>Price range</span><b>'+esc(p.priceRange||'—')+'</b></div>'+
+   '<div class="kv"><span>Best for</span><b>'+esc(p.occasion||'—')+'</b></div>'+
+   '<div class="kv"><span>Customer profile</span><b>'+esc(p.customer||'—')+'</b></div>'+
+   (p.points?'<div class="hr"></div><div class="sect">Key selling points</div><div class="note" style="margin-top:6px;white-space:pre-wrap">'+esc(p.points)+'</div>':'')+
+   (p.styling?'<div class="hr"></div><div class="sect">Styling tips</div><div class="note" style="margin-top:6px;white-space:pre-wrap">'+esc(p.styling)+'</div>':'')+
+   (p.care?'<div class="hr"></div><div class="sect">Care instructions</div><div class="note" style="margin-top:6px;white-space:pre-wrap">'+esc(p.care)+'</div>':''));
+}
+function editProduct(id){
+  const p=id? Object.assign({},state.products[id]) : {id:'',name:'',cat:state.cats[0]||'',fabric:'',origin:'',
+    priceRange:'',occasion:'',customer:'',points:'',styling:'',care:'',image:''};
+  const f=(k,l,ph)=>'<div class="field"><label class="lb">'+l+'</label><input class="inp" id="pf_'+k+'" value="'+esc(p[k]||'')+'" placeholder="'+esc(ph||'')+'"></div>';
+  const ta=(k,l)=>'<div class="field"><label class="lb">'+l+'</label><textarea class="inp" id="pf_'+k+'">'+esc(p[k]||'')+'</textarea></div>';
+  openSheet('<div class="sh"><h3>'+(id?'Edit product':'Add product')+'</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   f('name','Product name','Banarasi Silk')+
+   '<div class="field"><label class="lb">Saree category</label><select class="inp" id="pf_cat">'+
+     state.cats.map(c=>'<option'+(p.cat===c?' selected':'')+'>'+esc(c)+'</option>').join('')+'</select></div>'+
+   f('fabric','Fabric','Silk')+f('origin','Origin','Varanasi')+
+   f('priceRange','Price range','₹4,000 – ₹25,000')+
+   f('occasion','Best for','Wedding / Festive')+
+   f('customer','Customer profile','Bride, wedding shopper')+
+   ta('points','Key selling points')+ta('styling','Styling tips')+ta('care','Care instructions')+
+   f('image','Image URL (optional)','https://…')+
+   '<div class="note" style="margin-bottom:10px">Paste a public image link. Uploading files needs paid storage, so links keep this free.</div>'+
+   '<button class="btn" id="pSave">Save product</button>'+
+   (id?'<div style="height:8px"></div><button class="btn dgr" id="pDel">Delete product</button>':''));
+  on('#pSave','click',async()=>{
+    const o={id:p.id};
+    ['name','fabric','origin','priceRange','occasion','customer','points','styling','care','image']
+      .forEach(k=> o[k]=$('#pf_'+k).value.trim());
+    o.cat=$('#pf_cat').value;
+    if(!o.name) return toast('Product name is required',true);
+    await DB.saveProduct(o);
+    await DB.notify({title:'New product knowledge',msg:o.name+' added to the knowledge hub',type:'product',scope:'all'});
+    await DB.audit('PRODUCT_SAVE',o.name); closeSheet(); toast('Product saved'); render();
+  });
+  on('#pDel','click',async()=>{ if(!confirm('Delete this product?')) return;
+    await DB.delProduct(p.id); await DB.audit('PRODUCT_DELETE',p.name); closeSheet(); toast('Deleted'); render(); });
+}
+
+/* ---------------- ASK ADMIN ---------------- */
+function askBlock(){
+  const s=state.session;
+  const mine=Object.values(state.questions).filter(q=> s.role==='store'? q.storeId===s.storeId : true)
+    .sort((a,b)=>(b.tsSort||0)-(a.tsSort||0)).slice(0,8);
+  return '<div class="sec"><div class="sech"><span class="sect">Ask a question</span></div>'+
+    '<div class="card pad">'+
+      '<textarea class="inp" id="qBox" placeholder="e.g. What is the difference between Banarasi and Kanjivaram?"></textarea>'+
+      '<div style="height:9px"></div><button class="btn" id="qSend">Send to Admin</button></div></div>'+
+    (mine.length? '<div class="sec"><div class="sech"><span class="sect">Recent questions</span></div><div class="card">'+
+      mine.map(q=>'<div class="ins"><i>'+(q.status==='Answered'?'✓':'⏳')+'</i><div><b>'+esc(q.q)+'</b>'+
+        '<div class="note">'+esc(q.storeId||'')+' · '+esc(q.ts||'')+' · '+esc(q.status)+'</div>'+
+        (q.a?'<div class="note" style="margin-top:5px;color:var(--ink)">'+esc(q.a)+'</div>':'')+
+        '</div></div>').join('')+'</div></div>':'');
+}
+function bindAsk(){
+  on('#qSend','click',async()=>{
+    const t=$('#qBox').value.trim(); if(!t) return toast('Type your question first',true);
+    const s=state.session;
+    await DB.saveQA({ q:t, a:'', status:'Pending', storeId:s.storeId||'', am:s.am||'',
+      region:s.region||'', user:s.name||s.role, ts:nowStamp(), tsSort:Date.now() });
+    $('#qBox').value=''; toast('Question sent to Admin'); render();
+  });
+  on('#pq','input',e=>{ state.filters.q=e.target.value; clearTimeout(window.__pq);
+    window.__pq=setTimeout(()=>render(),260); });
+}
+
+/* ---------------- HISTORY ---------------- */
+function historyScreen(){
+  const sid=state.session.storeId;
+  const mk=state.calMonth||monthKey(state.asOf);
+  const from=mk+'-01', to=monthEnd(from);
+  const rows=dsrIn([sid],from,to).slice().reverse();
+  const a=agg(rows);
+  const months=[]; let m=monthKey(fyStart(todayISO()));
+  while(m<=monthKey(todayISO())){ months.push(m); const y=+m.slice(0,4),mo=+m.slice(5,7);
+    m = mo===12? (y+1)+'-01' : y+'-'+d2(mo+1); }
+  return '<div class="sec"><div class="sech"><span class="sect">My DSR history</span></div>'+
+    '<select class="inp" onchange="state.calMonth=this.value;render()">'+
+      months.map(x=>'<option value="'+x+'"'+(x===mk?' selected':'')+'>'+MON[+x.slice(5,7)-1]+' '+x.slice(0,4)+'</option>').join('')+
+    '</select></div>'+
+   '<div class="sec"><div class="r3">'+
+     '<div class="mini"><div class="k">Days filled</div><div class="v num">'+rows.length+'</div></div>'+
+     '<div class="mini"><div class="k">Sale</div><div class="v num">'+inr(a.ty)+'</div></div>'+
+     '<div class="mini"><div class="k">Ach</div><div class="v num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</div></div>'+
+   '</div></div>'+
+   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>Gr%</th><th>Qty</th><th>S.Qty</th><th>S.Val</th><th>Remarks</th></tr></thead><tbody>'+
+     rows.map(r=>{ const ac=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0? (r.ty-r.ly)/r.ly*100:null;
+       return '<tr><td>'+fmtShort(r.date)+'</td><td class="num">'+inr(r.ly)+'</td><td class="num">'+inr(r.target)+'</td>'+
+       '<td class="num"><b>'+inr(r.ty)+'</b></td>'+
+       '<td class="num '+(ac===null?'m':(ac>=100?'g':ac>=90?'w':'r'))+'">'+(ac===null?'—':pct1(ac))+'</td>'+
+       '<td class="num '+grCls(gr)+'">'+(gr===null?'N/A':sgn(gr))+'</td>'+
+       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td><td class="num">'+inr(r.sVal)+'</td>'+
+       '<td style="text-align:left;white-space:normal;max-width:170px">'+esc(r.remarks||'')+'</td></tr>'; }).join('')+
+     '</tbody></table></div>'+
+     '<div style="height:10px"></div><button class="btn ghost sm" onclick="exportRows(dsrIn([\''+esc(sid)+'\'],\''+from+'\',\''+to+'\'),\'csv\',\'my_dsr_'+mk+'\')">Export CSV</button>'
+     : '<div class="card"><div class="empty">No DSR submitted in this month yet.</div></div>');
+}
+/* ==================== SHARED CONTROLS ==================== */
+function periodBar(){
+  return '<div class="sec"><div class="seg">'+['FTD','WTD','MTD','YTD'].map(p=>
+    '<button class="'+(state.period===p?'on':'')+'" onclick="state.period=\''+p+'\';render()">'+p+'</button>').join('')+
+    '</div><div class="note" style="margin-top:6px;text-align:center">'+
+    (()=>{const[f,t]=periodRange(state.period,state.asOf); return fmt(f)+' → '+fmt(t)+
+      (state.period==='YTD'?' · '+fyLabel(state.asOf):'');})()+'</div></div>';
+}
+function dateBar(){
+  return '<div class="sec"><div class="fg" style="grid-template-columns:1fr auto">'+
+    '<input class="inp" type="date" value="'+state.asOf+'" max="'+todayISO()+'" onchange="state.asOf=this.value;render()">'+
+    '<button class="btn ghost sm" onclick="state.asOf=todayISO();render()">Today</button></div></div>';
+}
+function filterBar(){
+  const s=state.session;
+  if(s.role==='store') return '';
+  const showR = s.role!=='am';
+  return '<div class="sec"><div class="fg">'+
+    (showR? sel('region','Region',['ALL'].concat(regions())):'')+
+    (showR? sel('am','AM',['ALL'].concat(ams())):'')+
+    sel('type','Store type',['ALL','L2L','< 1 YR','NEW'])+
+    sel('status','Status',['ALL','ACHIEVED','CLOSE','NEEDS ACTION','NO DATA'])+
+   '</div><div style="height:8px"></div><button class="btn ghost sm" onclick="resetFilters()">Reset filters</button></div>';
+}
+function sel(k,label,opts){
+  return '<div><label class="lb">'+label+'</label><select class="inp" onchange="state.filters.'+k+'=this.value;state.page=1;render()">'+
+    opts.map(o=>'<option'+(state.filters[k]===o?' selected':'')+'>'+esc(o)+'</option>').join('')+'</select></div>';
+}
+function resetFilters(){ state.filters={region:'ALL',am:'ALL',type:'ALL',status:'ALL',q:''}; state.page=1; render(); }
+
+function filteredStores(){
+  const f=state.filters;
+  return storesFor(state.session).filter(s=>
+    (f.region==='ALL'||s.region===f.region) &&
+    (f.am==='ALL'||s.am===f.am) &&
+    (f.type==='ALL'||s.storeType===f.type));
+}
+function storeRows(){
+  const [from,to]=periodRange(state.period,state.asOf);
+  const rows=filteredStores().map(s=>{
+    const a=agg(state.period==='YTD'? rollIn([s.storeId],from,to) : dsrIn([s.storeId],from,to));
+    return {s,a,st:statusOf(a)};
+  }).filter(r=> state.filters.status==='ALL' || r.st.t===state.filters.status);
+  const k=state.sort.k, d=state.sort.d;
+  rows.sort((x,y)=>{
+    const gv=r=> k==='store'? r.s.storeId : (k==='ach'? (r.a.ach===null?-1e9:r.a.ach)
+      : k==='growth'? (r.a.growth===null?-1e9:r.a.growth) : N(r.a[k]));
+    const a=gv(x),b=gv(y);
+    if(typeof a==='string') return d*a.localeCompare(b);
+    return d*(a-b);
+  });
+  return {rows, tot:agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,sQty:a.sQty,sVal:a.sVal,days:1})))};
+}
+function sortBy(k){ state.sort = state.sort.k===k? {k,d:-state.sort.d} : {k,d:-1}; render(); }
+function th(k,label){ const on=state.sort.k===k;
+  return '<th onclick="sortBy(\''+k+'\')">'+label+(on?(state.sort.d<0?' ▾':' ▴'):'')+'</th>'; }
+
+/* ==================== CONTROL TOWER ==================== */
+function controlHome(){
+  const s=state.session;
+  const {rows,tot}=storeRows();
+  const ids=filteredStores().map(x=>x.storeId);
+  const subm=ids.filter(id=>getDSR(id,state.asOf)).length;
+  const title = s.role==='am' ? s.am+' — '+s.region : 'Management Control Tower';
+  return '<div class="sec"><div class="card pad">'+
+      '<div style="font-size:17px;font-weight:800;letter-spacing:-.02em">'+esc(title)+'</div>'+
+      '<div class="note">'+fmt(state.asOf)+' · '+ids.length+' stores in view</div></div></div>'+
+    dateBar()+periodBar()+
+    '<div class="sec"><div class="kgrid">'+
+      '<div class="kpi hero"><div class="k">Total sale · '+state.period+'</div>'+
+        '<div class="v num">'+inr(tot.ty)+'</div>'+
+        '<div class="s num">Target '+inr(tot.target)+' · LY '+inr(tot.ly)+'</div></div>'+
+      '<div class="kpi"><div class="k">Achievement</div><div class="v num '+achCls(tot)+'">'+(tot.ach===null?'—':pct1(tot.ach))+'</div>'+
+        '<div class="s num">Gap '+inr(tot.ty-tot.target)+'</div></div>'+
+      '<div class="kpi"><div class="k">Growth vs LY</div><div class="v num '+grCls(tot.growth)+'">'+(tot.growth===null?'N/A':sgn(tot.growth))+'</div>'+
+        '<div class="s">Like for like</div></div>'+
+      '<div class="kpi"><div class="k">Sarees sale</div><div class="v num">'+inr(tot.sVal)+'</div>'+
+        '<div class="s num">'+(tot.sValPct===null?'—':pct1(tot.sValPct))+' of sale</div></div>'+
+      '<div class="kpi tap" onclick="go(\'pending\')"><div class="k">DSR submission</div>'+
+        '<div class="v num '+(subm===ids.length?'g':(subm>=ids.length*0.9?'w':'r'))+'">'+subm+'/'+ids.length+'</div>'+
+        '<div class="s">'+(ids.length-subm)+' pending today</div></div>'+
+    '</div></div>'+
+    filterBar()+
+    '<div class="sec"><div class="sech"><span class="sect">Insights</span></div>'+
+      '<div class="card">'+insights(rows,tot,subm,ids.length)+'</div></div>'+
+    chartBox('cStores','Target vs achievement — top 12 stores')+
+    (s.role==='am'? '' : chartBox('cRegion','Region-wise achievement %'))+
+    chartBox('cDaily','Daily sale vs target — this month')+
+    '<div class="sec"><div class="sech"><span class="sect">Top 10 stores</span>'+
+      '<button class="btn xs ghost" onclick="go(\'perf\')">All stores</button></div>'+
+      miniTable(rows.slice().sort((a,b)=>(b.a.ach===null?-1:b.a.ach)-(a.a.ach===null?-1:a.a.ach)).slice(0,10))+'</div>'+
+    '<div class="sec"><div class="sech"><span class="sect">Needs action — bottom 10</span></div>'+
+      miniTable(rows.slice().filter(r=>r.a.target>0).sort((a,b)=>(a.a.ach===null?1e9:a.a.ach)-(b.a.ach===null?1e9:b.a.ach)).slice(0,10))+'</div>';
+}
+function miniTable(rows){
+  if(!rows.length) return '<div class="card"><div class="empty">No data in this period.</div></div>';
+  return '<div class="tw"><table><thead><tr><th>Store</th><th>TY</th><th>Ach%</th><th>Gr%</th><th>Status</th></tr></thead><tbody>'+
+    rows.map(r=>'<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span>'+
+      '<div class="note">'+esc(r.s.region)+'</div></td>'+
+      '<td class="num">'+inr(r.a.ty)+'</td>'+
+      '<td class="num '+achCls(r.a)+'">'+(r.a.ach===null?'—':pct1(r.a.ach))+'</td>'+
+      '<td class="num '+grCls(r.a.growth)+'">'+(r.a.growth===null?'N/A':sgn(r.a.growth))+'</td>'+
+      '<td><span class="pill '+r.st.c+'">'+r.st.t+'</span></td></tr>').join('')+'</tbody></table></div>';
+}
+function insights(rows,tot,subm,total){
+  const out=[];
+  out.push(['📋', subm+' of '+total+' stores have submitted today\'s DSR'+(total?' ('+Math.round(subm/total*100)+'%)':'')+'.']);
+  if(tot.ach!==null) out.push([tot.ach>=100?'✅':'⚠️','Cluster achieved '+pct1(tot.ach)+' of '+state.period+' target.']);
+  const withAch=rows.filter(r=>r.a.ach!==null);
+  if(withAch.length){
+    const top=withAch.reduce((a,b)=>b.a.ach>a.a.ach?b:a);
+    const bot=withAch.reduce((a,b)=>b.a.ach<a.a.ach?b:a);
+    out.push(['🏆', top.s.storeId+' is leading at '+pct1(top.a.ach)+'.']);
+    if(bot.a.ach<90) out.push(['🔻', bot.s.storeId+' needs attention at '+pct1(bot.a.ach)+'.']);
+  }
+  if(tot.growth!==null) out.push([tot.growth>=0?'📈':'📉','Sales are '+sgn(tot.growth)+' vs last year.']);
+  if(tot.sValPct!==null) out.push(['🥻','Sarees contribute '+pct1(tot.sValPct)+' of total sale ('+inr(tot.sVal)+').']);
+  const lowN=filteredStores().filter(s=>lowStockFor(s.storeId).length).length;
+  if(lowN) out.push(['📦', lowN+' store'+(lowN>1?'s have':' has')+' saree categories below minimum stock.']);
+  return out.map(([i,t])=>'<div class="ins"><i>'+i+'</i><div>'+esc(t)+'</div></div>').join('');
+}
+
+/* ==================== REGION / AM ==================== */
+function groupScreen(kind){
+  const [from,to]=periodRange(state.period,state.asOf);
+  const keys = kind==='region'? regions() : ams();
+  const rows = keys.map(k=>{
+    const ss=filteredStores().filter(s=> kind==='region'? s.region===k : s.am===k);
+    const ids=ss.map(s=>s.storeId);
+    const a=agg(state.period==='YTD'? rollIn(ids,from,to) : dsrIn(ids,from,to));
+    const subm=ids.filter(id=>getDSR(id,state.asOf)).length;
+    return {k,n:ss.length,ids,a,subm,st:statusOf(a)};
+  }).filter(r=>r.n>0);
+  rows.sort((x,y)=>(y.a.ach===null?-1:y.a.ach)-(x.a.ach===null?-1:x.a.ach));
+  const tot=agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,sQty:a.sQty,sVal:a.sVal,days:1})));
+  return dateBar()+periodBar()+filterBar()+
+    '<div class="sec"><div class="sech"><span class="sect">'+(kind==='region'?'Region':'AM')+' performance</span>'+
+      '<button class="btn xs ghost" onclick="exportGroup(\''+kind+'\')">Export</button></div>'+
+    '<div class="tw"><table><thead><tr><th>'+(kind==='region'?'Region':'AM')+'</th><th>Stores</th><th>LY</th><th>Target</th>'+
+      '<th>TY</th><th>Ach%</th><th>Gr%</th><th>Sarees</th><th>S%</th><th>DSR</th></tr></thead><tbody>'+
+      rows.map(r=>'<tr><td><span class="lnk" onclick="drillGroup(\''+kind+'\',\''+esc(r.k)+'\')">'+esc(r.k)+'</span>'+
+        (kind==='region'? '<div class="note">'+esc((activeStores().find(s=>s.region===r.k)||{}).am||'')+'</div>':'')+'</td>'+
+        '<td class="num">'+r.n+'</td><td class="num">'+inr(r.a.ly)+'</td><td class="num">'+inr(r.a.target)+'</td>'+
+        '<td class="num"><b>'+inr(r.a.ty)+'</b></td>'+
+        '<td class="num '+achCls(r.a)+'">'+(r.a.ach===null?'—':pct1(r.a.ach))+'</td>'+
+        '<td class="num '+grCls(r.a.growth)+'">'+(r.a.growth===null?'N/A':sgn(r.a.growth))+'</td>'+
+        '<td class="num">'+inr(r.a.sVal)+'</td>'+
+        '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
+        '<td class="num '+(r.subm===r.n?'g':'r')+'">'+r.subm+'/'+r.n+'</td></tr>').join('')+
+      '<tr style="background:#FAF9FC"><td><b>TOTAL</b></td><td class="num"><b>'+rows.reduce((x,r)=>x+r.n,0)+'</b></td>'+
+        '<td class="num"><b>'+inr(tot.ly)+'</b></td><td class="num"><b>'+inr(tot.target)+'</b></td>'+
+        '<td class="num"><b>'+inr(tot.ty)+'</b></td>'+
+        '<td class="num '+achCls(tot)+'"><b>'+(tot.ach===null?'—':pct1(tot.ach))+'</b></td>'+
+        '<td class="num '+grCls(tot.growth)+'"><b>'+(tot.growth===null?'N/A':sgn(tot.growth))+'</b></td>'+
+        '<td class="num"><b>'+inr(tot.sVal)+'</b></td><td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td><td></td></tr>'+
+      '</tbody></table></div>'+
+      '<div class="note" style="margin-top:8px">Achievement is always total sale ÷ total target — never an average of store percentages.</div></div>'+
+    chartBox('cGroup',(kind==='region'?'Region':'AM')+'-wise achievement %');
+}
+function drillGroup(kind,key){
+  state.filters[kind==='region'?'region':'am']=key; state.view='perf'; state.page=1; render(); window.scrollTo(0,0);
+}
+
+/* ==================== STORE PERFORMANCE TABLE ==================== */
+function perfScreen(){
+  const {rows,tot}=storeRows();
+  const per=25, pages=Math.max(1,Math.ceil(rows.length/per));
+  state.page=Math.min(state.page,pages);
+  const page=rows.slice((state.page-1)*per, state.page*per);
+  return dateBar()+periodBar()+filterBar()+
+   '<div class="sec"><div class="sech"><span class="sect">Store performance · '+rows.length+' stores</span>'+
+     '<span><button class="btn xs ghost" onclick="exportRows(misRows(),\'csv\',\'store_performance\')">CSV</button> '+
+     '<button class="btn xs ghost" onclick="exportRows(misRows(),\'xlsx\',\'store_performance\')">Excel</button></span></div>'+
+   '<div class="tw"><table><thead><tr>'+th('store','Store')+'<th>Region</th><th>AM</th><th>Type</th>'+
+     th('ly','LY')+th('target','Target')+th('ty','TY')+th('ach','Ach%')+th('growth','Gr%')+
+     th('qty','Qty')+th('sQty','S.Qty')+th('sVal','S.Val')+'<th>S.Val%</th><th>Status</th><th>DSR</th></tr></thead><tbody>'+
+     (page.length? page.map(r=>{ const d=getDSR(r.s.storeId,state.asOf);
+       return '<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span></td>'+
+       '<td>'+esc(r.s.region)+'</td><td style="text-align:right">'+esc(r.s.am)+'</td>'+
+       '<td><span class="chip">'+esc(r.s.storeType)+'</span></td>'+
+       '<td class="num">'+inr(r.a.ly)+'</td><td class="num">'+inr(r.a.target)+'</td>'+
+       '<td class="num"><b>'+inr(r.a.ty)+'</b></td>'+
+       '<td class="num '+achCls(r.a)+'">'+(r.a.ach===null?'—':pct1(r.a.ach))+'</td>'+
+       '<td class="num '+grCls(r.a.growth)+'">'+(r.a.growth===null?'N/A':sgn(r.a.growth))+'</td>'+
+       '<td class="num">'+int(r.a.qty)+'</td><td class="num">'+int(r.a.sQty)+'</td><td class="num">'+inr(r.a.sVal)+'</td>'+
+       '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
+       '<td><span class="pill '+r.st.c+'">'+r.st.t+'</span></td>'+
+       '<td>'+(d?'<span class="pill p-g">IN</span>':'<span class="pill p-r">PEND</span>')+'</td></tr>'; }).join('')
+      : '<tr><td colspan="15"><div class="empty">No stores match these filters.</div></td></tr>')+
+     '<tr style="background:#FAF9FC"><td colspan="4"><b>TOTAL ('+rows.length+')</b></td>'+
+       '<td class="num"><b>'+inr(tot.ly)+'</b></td><td class="num"><b>'+inr(tot.target)+'</b></td>'+
+       '<td class="num"><b>'+inr(tot.ty)+'</b></td>'+
+       '<td class="num '+achCls(tot)+'"><b>'+(tot.ach===null?'—':pct1(tot.ach))+'</b></td>'+
+       '<td class="num '+grCls(tot.growth)+'"><b>'+(tot.growth===null?'N/A':sgn(tot.growth))+'</b></td>'+
+       '<td class="num"><b>'+int(tot.qty)+'</b></td><td class="num"><b>'+int(tot.sQty)+'</b></td>'+
+       '<td class="num"><b>'+inr(tot.sVal)+'</b></td><td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td>'+
+       '<td colspan="2"></td></tr></tbody></table></div>'+
+   (pages>1? '<div class="pgr"><button class="btn ghost sm" '+(state.page<=1?'disabled':'')+
+      ' onclick="state.page--;render()">← Prev</button>'+
+      '<span class="note">Page '+state.page+' of '+pages+'</span>'+
+      '<button class="btn ghost sm" '+(state.page>=pages?'disabled':'')+' onclick="state.page++;render()">Next →</button></div>':'')+
+   '</div>';
+}
+
+/* ==================== STORE DRILL-DOWN ==================== */
+function openStore(sid){ state.drill=sid; state.view='storeDetail'; render(); window.scrollTo(0,0); }
+function storeDetail(){
+  const sid=state.drill, s=storeById(sid); if(!s){ state.view='perf'; return perfScreen(); }
+  const mk=state.calMonth||monthKey(state.asOf);
+  const from=mk+'-01', to=monthEnd(from);
+  const rows=dsrIn([sid],from,to).slice().reverse();
+  const isAdmin=state.session.role==='admin';
+  const low=lowStockFor(sid);
+  return '<div class="sec"><button class="btn ghost sm" onclick="go(\'perf\')">← Back</button></div>'+
+   '<div class="sec"><div class="card pad">'+
+     '<div style="font-size:19px;font-weight:800;letter-spacing:-.02em">'+esc(sid)+'</div>'+
+     '<div class="note">'+esc(s.state)+' · '+esc(s.region)+' · AM '+esc(s.am)+'</div>'+
+     '<div class="note">'+esc(s.storeType)+' · '+int(s.sqft)+' sq ft · I-Rod '+int(s.irod)+'</div></div></div>'+
+   dateBar()+
+   '<div class="sec"><div class="kgrid">'+['FTD','WTD','MTD','YTD'].map(p=>{
+      const a=aggFor([sid],p,state.asOf);
+      return '<div class="kpi"><div class="k">'+p+'</div>'+
+        '<div class="v num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</div>'+
+        '<div class="s num">'+inr(a.ty)+' / '+inr(a.target)+'</div>'+
+        '<div class="s">Gr <b class="'+grCls(a.growth)+'">'+(a.growth===null?'N/A':sgn(a.growth))+'</b></div></div>';
+    }).join('')+'</div></div>'+
+   (low.length? '<div class="alert a-warn">Low stock: '+low.map(x=>esc(x.cat)+' ('+x.current+')').join(', ')+'</div>':'')+
+   '<div class="sec"><div class="sech"><span class="sect">Daily history</span>'+
+     '<input class="inp" style="width:auto;padding:7px 9px;font-size:13px" type="month" value="'+mk+'" onchange="state.calMonth=this.value;render()"></div>'+
+   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>Gr%</th>'+
+     '<th>Qty</th><th>S.Qty</th><th>S.Val</th><th>Remarks</th>'+(isAdmin?'<th></th>':'')+'</tr></thead><tbody>'+
+     rows.map(r=>{ const ac=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0?(r.ty-r.ly)/r.ly*100:null;
+       return '<tr><td>'+fmtShort(r.date)+'</td><td class="num">'+inr(r.ly)+'</td><td class="num">'+inr(r.target)+'</td>'+
+       '<td class="num"><b>'+inr(r.ty)+'</b></td>'+
+       '<td class="num '+(ac===null?'m':(ac>=100?'g':ac>=90?'w':'r'))+'">'+(ac===null?'—':pct1(ac))+'</td>'+
+       '<td class="num '+grCls(gr)+'">'+(gr===null?'N/A':sgn(gr))+'</td>'+
+       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td><td class="num">'+inr(r.sVal)+'</td>'+
+       '<td style="text-align:left;white-space:normal;max-width:150px">'+esc(r.remarks||'')+
+         '<div class="note">'+esc(r.updatedBy||'')+'</div></td>'+
+       (isAdmin?'<td><button class="btn xs ghost" onclick="adminEdit(\''+esc(sid)+'\',\''+r.date+'\')">Edit</button></td>':'')+
+       '</tr>'; }).join('')+'</tbody></table></div>'
+     : '<div class="card"><div class="empty">No DSR in this month.</div></div>')+
+   (isAdmin? '<div style="height:10px"></div><button class="btn ghost sm" onclick="adminEdit(\''+esc(sid)+'\',\''+state.asOf+'\')">+ Add / correct an entry</button>':'')+
+   '</div>'+
+   chartBox('cStoreTrend','Daily sale vs target — '+MON[+mk.slice(5,7)-1]+' '+mk.slice(0,4));
+}
+/* ==================== DSR COMPLIANCE ==================== */
+function pendingScreen(){
+  const stores=filteredStores();
+  const subm=stores.filter(s=>getDSR(s.storeId,state.asOf));
+  const pend=stores.filter(s=>!getDSR(s.storeId,state.asOf));
+  const mk=state.calMonth||monthKey(state.asOf);
+  return dateBar()+filterBar()+
+   '<div class="sec"><div class="r3">'+
+     '<div class="mini"><div class="k">Submitted</div><div class="v num g">'+subm.length+'</div></div>'+
+     '<div class="mini"><div class="k">Pending</div><div class="v num r">'+pend.length+'</div></div>'+
+     '<div class="mini"><div class="k">Compliance</div><div class="v num">'+(stores.length?Math.round(subm.length/stores.length*100):0)+'%</div></div>'+
+   '</div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Pending today · '+fmt(state.asOf)+'</span>'+
+     (pend.length?'<button class="btn xs" onclick="remind()">Send reminder</button>':'')+'</div>'+
+   (pend.length? '<div class="tw"><table><thead><tr><th>Store</th><th>Region</th><th>AM</th><th>Type</th></tr></thead><tbody>'+
+     pend.map(s=>'<tr><td><span class="lnk" onclick="openStore(\''+esc(s.storeId)+'\')">'+esc(s.storeId)+'</span></td>'+
+       '<td>'+esc(s.region)+'</td><td style="text-align:right">'+esc(s.am)+'</td>'+
+       '<td><span class="chip">'+esc(s.storeType)+'</span></td></tr>').join('')+'</tbody></table></div>'
+     : '<div class="alert a-green">All stores have submitted today. Excellent compliance.</div>')+'</div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Monthly compliance</span>'+
+     '<input class="inp" style="width:auto;padding:7px 9px;font-size:13px" type="month" value="'+mk+'" onchange="state.calMonth=this.value;render()"></div>'+
+     complianceGrid(stores,mk)+'</div>';
+}
+function complianceGrid(stores,mk){
+  const from=mk+'-01', to=monthEnd(from), today=todayISO();
+  const days=daysBetween(from,to)+1;
+  let filled=0, possible=0;
+  const body=stores.map(s=>{
+    let cells='';
+    for(let i=0;i<days;i++){ const d=addDays(from,i);
+      if(d>today){ cells+='<span class="cd na">'+(i+1)+'</span>'; }
+      else { possible++; const has=getDSR(s.storeId,d); if(has) filled++;
+        cells+='<span class="cd '+(has?'ok':'no')+'" title="'+esc(s.storeId)+' '+fmt(d)+'">'+(i+1)+'</span>'; }
+    }
+    return '<div style="margin-bottom:9px"><div class="note" style="margin-bottom:3px"><b>'+esc(s.storeId)+
+      '</b> · '+esc(s.region)+'</div><div class="cal">'+cells+'</div></div>';
+  }).join('');
+  return '<div class="card pad">'+
+    '<div class="note" style="margin-bottom:9px">Compliance this month: <b>'+(possible?Math.round(filled/possible*100):0)+
+      '%</b> ('+filled+' of '+possible+' store-days)</div>'+
+    (stores.length>25? '<div class="note" style="margin-bottom:8px">Showing first 25 stores — narrow the filters to see others.</div>':'')+
+    body.split('</div><div style="margin-bottom:9px">').slice(0,25).join('</div><div style="margin-bottom:9px">')+
+    '<div class="lg"><span><i class="dot" style="background:#35A886"></i>Submitted</span>'+
+    '<span><i class="dot" style="background:#E58585"></i>Missing</span>'+
+    '<span><i class="dot" style="background:#DCDAE4"></i>Future</span></div></div>';
+}
+async function remind(){
+  const pend=filteredStores().filter(s=>!getDSR(s.storeId,state.asOf));
+  for(const s of pend.slice(0,40))
+    await DB.notify({title:'DSR pending',msg:'Please submit DSR for '+fmt(state.asOf),type:'dsr',scope:s.storeId});
+  await DB.audit('REMINDER','Sent to '+pend.length+' stores for '+fmt(state.asOf));
+  toast('Reminder sent to '+pend.length+' stores');
+}
+
+/* ==================== ADMIN Q&A ==================== */
+function qaScreen(){
+  const qs=Object.values(state.questions).sort((a,b)=>(b.tsSort||0)-(a.tsSort||0));
+  const pend=qs.filter(q=>q.status!=='Answered');
+  return '<div class="sec"><div class="r3">'+
+     '<div class="mini"><div class="k">Total</div><div class="v num">'+qs.length+'</div></div>'+
+     '<div class="mini"><div class="k">Pending</div><div class="v num r">'+pend.length+'</div></div>'+
+     '<div class="mini"><div class="k">Answered</div><div class="v num g">'+(qs.length-pend.length)+'</div></div>'+
+   '</div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Staff questions</span></div>'+
+   (qs.length? '<div class="card">'+qs.map(q=>
+     '<div class="ins"><i>'+(q.status==='Answered'?'✓':'⏳')+'</i><div style="flex:1">'+
+       '<b>'+esc(q.q)+'</b>'+
+       '<div class="note">'+esc(q.storeId||q.user||'')+(q.region?' · '+esc(q.region):'')+' · '+esc(q.ts||'')+'</div>'+
+       (q.a? '<div class="note" style="margin-top:5px;color:var(--ink)"><b>Answer:</b> '+esc(q.a)+'</div>':'')+
+       '<div style="height:6px"></div>'+
+       '<button class="btn xs ghost" onclick="answerQ(\''+q.id+'\')">'+(q.a?'Edit answer':'Answer')+'</button>'+
+       (q.kb?' <span class="pill p-g">KNOWLEDGE BASE</span>':'')+
+     '</div></div>').join('')+'</div>' : '<div class="card"><div class="empty">No questions yet.</div></div>')+'</div>';
+}
+function answerQ(id){
+  const q=state.questions[id]; if(!q) return;
+  openSheet('<div class="sh"><h3>Answer question</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   '<div class="alert a-info">'+esc(q.q)+'</div>'+
+   '<div class="note" style="margin-bottom:10px">'+esc(q.storeId||'')+' · '+esc(q.ts||'')+'</div>'+
+   '<div class="field"><label class="lb">Your answer</label><textarea class="inp" id="ansBox">'+esc(q.a||'')+'</textarea></div>'+
+   '<label class="note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px">'+
+     '<input type="checkbox" id="kbChk" '+(q.kb?'checked':'')+'> Mark as Knowledge Base</label>'+
+   '<button class="btn" id="ansSave">Save answer</button>');
+  on('#ansSave','click',async()=>{
+    const a=$('#ansBox').value.trim(); if(!a) return toast('Type an answer',true);
+    q.a=a; q.status='Answered'; q.kb=$('#kbChk').checked; q.answeredBy=state.session.name; q.answeredAt=nowStamp();
+    await DB.saveQA(q);
+    await DB.notify({title:'Your question was answered',msg:q.q.slice(0,70),type:'qa',scope:q.storeId||'all'});
+    await DB.audit('QA_ANSWER',q.q.slice(0,60));
+    closeSheet(); toast('Answer saved'); render();
+  });
+}
+
+/* ==================== ADMIN: EDIT ENTRY ==================== */
+function adminEdit(sid,date){
+  const ex=getDSR(sid,date)||{};
+  openSheet('<div class="sh"><h3>Correct DSR</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   '<div class="note" style="margin-bottom:10px">'+esc(sid)+'</div>'+
+   '<div class="field"><label class="lb">Date</label><input class="inp" id="aeDate" type="date" value="'+date+'"></div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeLy','LY Sale',ex.ly)+numField('aeTg','TY Target',ex.target)+'</div>'+
+   numField('aeTy','TY Sale',ex.ty,true)+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeQ','Total qty',ex.qty)+numField('aeSq','Sarees qty',ex.sQty)+'</div>'+
+   numField('aeSv','Sarees value',ex.sVal)+
+   '<div class="field"><label class="lb">Remarks</label><input class="inp" id="aeRm" value="'+esc(ex.remarks||'')+'"></div>'+
+   '<button class="btn" id="aeSave">Save correction</button>'+
+   (getDSR(sid,date)?'<div style="height:8px"></div><button class="btn dgr" id="aeDel">Delete this entry</button>':''));
+  on('#aeSave','click',async()=>{
+    const d=$('#aeDate').value; if(!d) return toast('Choose a date',true);
+    const rec={ storeId:sid, date:d, ly:N($('#aeLy').value), target:N($('#aeTg').value), ty:N($('#aeTy').value),
+      qty:N($('#aeQ').value), sQty:N($('#aeSq').value), sVal:N($('#aeSv').value),
+      remarks:$('#aeRm').value.trim(), updatedBy:'admin' };
+    if(Object.values(rec).some(v=>typeof v==='number'&&v<0)) return toast('Values cannot be negative',true);
+    const old=await DB.saveDSR(rec);
+    await DB.audit('DSR_ADMIN_EDIT', sid+' · '+fmt(d),
+      old?{ly:old.ly,target:old.target,ty:old.ty}:null,{ly:rec.ly,target:rec.target,ty:rec.ty});
+    closeSheet(); toast('Entry corrected'); render();
+  });
+  on('#aeDel','click',async()=>{ if(!confirm('Delete the DSR for '+fmt(date)+'?')) return;
+    const old=await DB.delDSR(sid,date);
+    await DB.audit('DSR_DELETE', sid+' · '+fmt(date), old?{ty:old.ty}:null,null);
+    closeSheet(); toast('Entry deleted'); render(); });
+}
+
+/* ==================== MASTERS ==================== */
+function masterScreen(){
+  const tab=state.tab||'stores';
+  return '<div class="sec"><div class="seg">'+
+    [['stores','Store master'],['cats','Saree categories'],['import','Import / Export']].map(([v,l])=>
+      '<button class="'+(tab===v?'on':'')+'" onclick="state.tab=\''+v+'\';render()">'+l+'</button>').join('')+
+    '</div></div>'+
+    (tab==='stores'? masterStores() : tab==='cats'? masterCats() : masterImport());
+}
+function masterStores(){
+  const list=allStores();
+  return '<div class="sec"><div class="sech"><span class="sect">'+list.length+' stores</span>'+
+     '<button class="btn xs" onclick="editStore()">+ Add store</button></div>'+
+   '<div class="tw"><table><thead><tr><th>Store</th><th>Region</th><th>AM</th><th>Type</th><th>Sq ft</th><th>I-Rod</th><th>Status</th><th></th></tr></thead><tbody>'+
+     list.map(s=>'<tr><td>'+esc(s.storeId)+'</td><td>'+esc(s.region)+'</td>'+
+       '<td style="text-align:right">'+esc(s.am)+'</td><td><span class="chip">'+esc(s.storeType)+'</span></td>'+
+       '<td class="num">'+int(s.sqft)+'</td><td class="num">'+int(s.irod)+'</td>'+
+       '<td><span class="pill '+(s.active!==false?'p-g':'p-m')+'">'+(s.active!==false?'ACTIVE':'INACTIVE')+'</span></td>'+
+       '<td><button class="btn xs ghost" onclick="editStore(\''+esc(s.storeId)+'\')">Edit</button></td></tr>').join('')+
+   '</tbody></table></div></div>';
+}
+function editStore(id){
+  const s=id? Object.assign({},state.stores[id]) : {storeId:'',state:'WEST BENGAL',region:regions()[0]||'WB-01',
+    am:ams()[0]||'',storeType:'NEW',sqft:0,irod:0,active:true};
+  openSheet('<div class="sh"><h3>'+(id?'Edit store':'Add store')+'</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
+   '<div class="field"><label class="lb">Store code / site name</label><input class="inp" id="msId" value="'+esc(s.storeId)+'"'+(id?' disabled':'')+'></div>'+
+   '<div class="field"><label class="lb">State</label><input class="inp" id="msSt" value="'+esc(s.state)+'"></div>'+
+   '<div class="field"><label class="lb">Region</label><input class="inp" id="msRg" value="'+esc(s.region)+'" list="rgList"></div>'+
+   '<datalist id="rgList">'+regions().map(r=>'<option>'+esc(r)+'</option>').join('')+'</datalist>'+
+   '<div class="field"><label class="lb">AM / TCM / RM</label><input class="inp" id="msAm" value="'+esc(s.am)+'" list="amList"></div>'+
+   '<datalist id="amList">'+ams().map(a=>'<option>'+esc(a)+'</option>').join('')+'</datalist>'+
+   '<div class="field"><label class="lb">Store type</label><select class="inp" id="msTy">'+
+     ['L2L','< 1 YR','NEW'].map(t=>'<option'+(s.storeType===t?' selected':'')+'>'+t+'</option>').join('')+'</select></div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('msSq','Square feet',s.sqft)+numField('msIr','I-Rod',s.irod)+'</div>'+
+   '<label class="note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px">'+
+     '<input type="checkbox" id="msAc" '+(s.active!==false?'checked':'')+'> Active</label>'+
+   '<div class="field"><label class="lb">Store password (leave blank to use the common one)</label>'+
+     '<input class="inp" id="msPw" type="password" placeholder="'+(s.pwHash?'Set — type to change':'Using common password')+'"></div>'+
+   '<button class="btn" id="msSave">Save store</button>');
+  on('#msSave','click',async()=>{
+    const o={ storeId:(id||$('#msId').value.trim().toUpperCase()), state:$('#msSt').value.trim(),
+      region:$('#msRg').value.trim().toUpperCase(), am:$('#msAm').value.trim().toUpperCase(),
+      storeType:$('#msTy').value, sqft:N($('#msSq').value), irod:N($('#msIr').value), active:$('#msAc').checked };
+    if(!o.storeId) return toast('Store code is required',true);
+    if(!id && state.stores[o.storeId]) return toast('That store code already exists',true);
+    if(s.pwHash) o.pwHash=s.pwHash;
+    const pw=$('#msPw').value; if(pw) o.pwHash=await sha(pw);
+    await DB.saveStore(o); await DB.audit(id?'STORE_UPDATE':'STORE_ADD',o.storeId,id?s:null,o);
+    closeSheet(); toast('Store saved'); render();
+  });
+}
+function masterCats(){
+  return '<div class="sec"><div class="sech"><span class="sect">Saree categories · '+state.cats.length+'</span></div>'+
+   '<div class="card pad"><div class="fg" style="grid-template-columns:1fr auto">'+
+     '<input class="inp" id="ncat" placeholder="New category name">'+
+     '<button class="btn sm" id="addCat">Add</button></div>'+
+   '<div class="hr"></div>'+
+   state.cats.map((c,i)=>'<div class="kv"><span>'+esc(c)+'</span>'+
+     '<span><button class="btn xs ghost" onclick="renameCat('+i+')">Rename</button> '+
+     '<button class="btn xs ghost" onclick="delCat('+i+')">Delete</button></span></div>').join('')+
+   '</div></div>';
+}
+async function delCat(i){ if(!confirm('Delete "'+state.cats[i]+'"? Stock rows for it stay in the database.')) return;
+  const n=state.cats[i]; state.cats.splice(i,1); await DB.saveCats(); await DB.audit('CATEGORY_DELETE',n); render(); }
+async function renameCat(i){ const n=prompt('New name',state.cats[i]); if(!n) return;
+  const o=state.cats[i]; state.cats[i]=n.trim(); await DB.saveCats(); await DB.audit('CATEGORY_RENAME',o+' → '+n); render(); }
+
+/* ==================== IMPORT / EXPORT ==================== */
+function masterImport(){
+  return '<div class="sec"><div class="sech"><span class="sect">Import store master</span></div>'+
+   '<div class="card pad">'+
+     '<div class="note" style="margin-bottom:10px">Upload an Excel file with these columns: <b>STATE, REGION, TCM/AM/RM, SITE NAME(SAP), STORE TYPE, SQUARE FEET, I-Rod</b>. Existing stores are updated, new ones added. Nothing is deleted.</div>'+
+     '<input class="inp" type="file" id="impFile" accept=".xlsx,.xls,.csv">'+
+     '<div id="impPrev"></div></div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Export</span></div>'+
+   '<div class="card pad">'+
+     '<button class="btn ghost sm" onclick="exportStores(\'xlsx\')">Store master (Excel)</button> '+
+     '<button class="btn ghost sm" onclick="exportRows(misRows(),\'xlsx\',\'performance\')">Performance (Excel)</button> '+
+     '<button class="btn ghost sm" onclick="exportRows(misRows(),\'csv\',\'performance\')">Performance (CSV)</button> '+
+     '<button class="btn ghost sm" onclick="exportStock()">Stock (Excel)</button> '+
+     '<button class="btn ghost sm" onclick="backupJSON()">Full backup (JSON)</button>'+
+   '</div></div>';
+}
+function bindImport(){
+  on('#impFile','change',e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const rd=new FileReader();
+    rd.onload=ev=>{
+      try{
+        const wb=XLSX.read(new Uint8Array(ev.target.result),{type:'array'});
+        let rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
+        if(rows.length && !('SITE NAME(SAP)' in rows[0])){
+          rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',range:1});
+        }
+        const norm=r=>{ const g=k=>{ for(const kk in r) if(String(kk).trim().toUpperCase()===k) return String(r[kk]).trim(); return ''; };
+          return { storeId:g('SITE NAME(SAP)')||g('SITE NAME')||g('STORE'), state:g('STATE'), region:g('REGION'),
+            am:g('TCM/AM/RM')||g('AM'), storeType:g('STORE TYPE'), sqft:N(g('SQUARE FEET')), irod:N(g('I-ROD')) }; };
+        const parsed=rows.map(norm).filter(r=>r.storeId);
+        const seen=new Set(), dupes=[];
+        parsed.forEach(r=>{ if(seen.has(r.storeId)) dupes.push(r.storeId); seen.add(r.storeId); });
+        const isNew=parsed.filter(r=>!state.stores[r.storeId]);
+        const chg=parsed.filter(r=>{ const o=state.stores[r.storeId]; return o && (o.region!==r.region||o.am!==r.am||o.storeType!==r.storeType||N(o.sqft)!==r.sqft||N(o.irod)!==r.irod); });
+        const bad=rows.length-parsed.length;
+        window.__imp=parsed;
+        $('#impPrev').innerHTML='<div class="hr"></div>'+
+          '<div class="kv"><span>Rows read</span><b>'+rows.length+'</b></div>'+
+          '<div class="kv"><span>Valid stores</span><b>'+parsed.length+'</b></div>'+
+          '<div class="kv"><span>New stores</span><b class="g">'+isNew.length+'</b></div>'+
+          '<div class="kv"><span>Changed stores</span><b class="w">'+chg.length+'</b></div>'+
+          '<div class="kv"><span>Duplicates in file</span><b class="'+(dupes.length?'r':'')+'">'+dupes.length+'</b></div>'+
+          '<div class="kv"><span>Invalid rows skipped</span><b class="'+(bad?'r':'')+'">'+bad+'</b></div>'+
+          (isNew.length? '<div class="note" style="margin-top:8px">New: '+isNew.slice(0,8).map(r=>esc(r.storeId)).join(', ')+(isNew.length>8?'…':'')+'</div>':'')+
+          '<div style="height:12px"></div><button class="btn" id="impGo">Confirm import ('+parsed.length+' stores)</button>';
+        on('#impGo','click',doImport);
+      }catch(err){ console.error(err); $('#impPrev').innerHTML='<div class="alert a-red">Could not read that file.</div>'; }
+    };
+    rd.readAsArrayBuffer(f);
+  });
+}
+async function doImport(){
+  const rows=window.__imp||[]; if(!rows.length) return;
+  const b=$('#impGo'); b.disabled=true; b.innerHTML='<span class="spin"></span>Importing…';
+  let n=0;
+  for(const r of rows){
+    const old=state.stores[r.storeId]||{};
+    await DB.saveStore(Object.assign({},old,{ storeId:r.storeId, state:r.state||old.state||'WEST BENGAL',
+      region:r.region||old.region, am:r.am||old.am, storeType:r.storeType||old.storeType||'NEW',
+      sqft:r.sqft||old.sqft||0, irod:r.irod||old.irod||0,
+      active: old.active===undefined? true : old.active }));
+    n++;
+  }
+  await DB.audit('STORE_IMPORT',n+' stores imported');
+  toast(n+' stores imported'); render();
+}
+function misRows(){
+  const [from,to]=periodRange(state.period,state.asOf);
+  const ids=filteredStores().map(s=>s.storeId);
+  return dsrIn(ids,from,to);
+}
+function rowOut(r){
+  const s=storeById(r.storeId)||{};
+  const ach=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0?(r.ty-r.ly)/r.ly*100:null;
+  return { Date:fmt(r.date), Store:r.storeId, State:s.state||'', Region:s.region||'', AM:s.am||'',
+    'Store Type':s.storeType||'', 'LY Sale':N(r.ly), 'TY Target':N(r.target), 'TY Sale':N(r.ty),
+    'Ach %': ach===null?'N/A':Math.round(ach*10)/10, 'Growth %': gr===null?'N/A':Math.round(gr*10)/10,
+    'Gap': N(r.ty)-N(r.target), 'Total Qty':N(r.qty), 'Sarees Qty':N(r.sQty), 'Sarees Value':N(r.sVal),
+    'Sarees Qty %': N(r.qty)>0? Math.round(r.sQty/r.qty*1000)/10 : 'N/A',
+    'Sarees Value %': N(r.ty)>0? Math.round(r.sVal/r.ty*1000)/10 : 'N/A',
+    Remarks:r.remarks||'', 'Last Updated':r.updatedAt||'', 'Updated By':r.updatedBy||'' };
+}
+function download(blob,name){ const u=URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=u; a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(u),1500); }
+function exportRows(rows,kind,base){
+  if(!rows.length) return toast('Nothing to export in this selection',true);
+  const data=rows.map(rowOut);
+  const name=base+'_'+state.period+'_'+state.asOf+'.'+(kind==='csv'?'csv':'xlsx');
+  if(kind==='csv'){
+    const heads=Object.keys(data[0]);
+    const csv=[heads.join(',')].concat(data.map(r=>heads.map(h=>{
+      const v=String(r[h]==null?'':r[h]); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }).join(','))).join('\n');
+    download(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),name);
+  } else {
+    const ws=XLSX.utils.json_to_sheet(data), wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Performance'); XLSX.writeFile(wb,name);
+  }
+  toast('Exported '+rows.length+' rows');
+}
+function exportGroup(kind){ exportRows(misRows(),'xlsx',kind); }
+function exportStores(){
+  const data=allStores().map(s=>({ 'SITE NAME(SAP)':s.storeId, STATE:s.state, REGION:s.region,
+    'TCM/AM/RM':s.am, 'STORE TYPE':s.storeType, 'SQUARE FEET':N(s.sqft), 'I-Rod':N(s.irod),
+    STATUS:s.active!==false?'ACTIVE':'INACTIVE' }));
+  const ws=XLSX.utils.json_to_sheet(data), wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Store Master'); XLSX.writeFile(wb,'store_master.xlsx'); toast('Store master exported');
+}
+function exportStock(){
+  const data=[]; for(const s of activeStores()) for(const r of stockRows(s.storeId))
+    if(N(r.opening)+N(r.received)+N(r.sold)>0)
+      data.push({ Store:s.storeId, Region:s.region, AM:s.am, Category:r.catId, Opening:N(r.opening),
+        Received:N(r.received), Sold:N(r.sold), Current:N(r.current), Value:N(r.value), Updated:r.updatedAt||'' });
+  if(!data.length) return toast('No stock entered yet',true);
+  const ws=XLSX.utils.json_to_sheet(data), wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Sarees Stock'); XLSX.writeFile(wb,'sarees_stock.xlsx'); toast('Stock exported');
+}
+function backupJSON(){ download(new Blob([JSON.stringify(DB.blob(),null,1)],{type:'application/json'}),
+  'sbs_backup_'+todayISO()+'.json'); toast('Backup downloaded'); }
+
+/* ==================== AUDIT & SETTINGS ==================== */
+function auditScreen(){
+  return '<div class="sec"><div class="sech"><span class="sect">Audit log · last '+state.audit.length+' actions</span></div>'+
+   (state.audit.length? '<div class="tw"><table><thead><tr><th>When</th><th>User</th><th>Action</th><th>Detail</th><th>Before</th><th>After</th></tr></thead><tbody>'+
+     state.audit.slice(0,200).map(e=>'<tr><td>'+esc(e.ts)+'</td><td style="text-align:right">'+esc(e.user)+'</td>'+
+       '<td style="text-align:right"><span class="chip">'+esc(e.action)+'</span></td>'+
+       '<td style="text-align:right">'+esc(e.detail||'')+'</td>'+
+       '<td style="text-align:right;max-width:150px;white-space:normal">'+esc(e.before||'—')+'</td>'+
+       '<td style="text-align:right;max-width:150px;white-space:normal">'+esc(e.after||'—')+'</td></tr>').join('')+
+     '</tbody></table></div>' : '<div class="card"><div class="empty">No changes logged yet.</div></div>')+'</div>';
+}
+function settingsScreen(){
+  const s=state.settings;
+  return '<div class="sec"><div class="sech"><span class="sect">Business rules</span></div><div class="card pad">'+
+     '<div class="field"><label class="lb">Financial year starts in</label><select class="inp" id="seFy">'+
+       MON.map((m,i)=>'<option value="'+(i+1)+'"'+(N(s.fyStart)===i+1?' selected':'')+'>'+m+'</option>').join('')+'</select></div>'+
+     '<div class="field"><label class="lb">Business week starts on</label><select class="inp" id="seWk">'+
+       ['Sunday','Monday'].map((d,i)=>'<option value="'+i+'"'+(N(s.weekStart)===i?' selected':'')+'>'+d+'</option>').join('')+'</select></div>'+
+     numField('seMin','Minimum saree stock (low-stock alert)',s.minStock)+
+     '<div class="field"><label class="lb">Historical editing by stores</label><select class="inp" id="seHe">'+
+       '<option value="sameDay"'+(s.histEdit==='sameDay'?' selected':'')+'>Same day only (recommended)</option>'+
+       '<option value="any"'+(s.histEdit==='any'?' selected':'')+'>Any past date</option></select></div>'+
+     '<label class="note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px">'+
+       '<input type="checkbox" id="seFu" '+(s.allowFuture?'checked':'')+'> Allow future-dated DSR</label>'+
+     '<button class="btn" id="seSave">Save settings</button></div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Passwords</span></div><div class="card pad">'+
+     '<div class="note" style="margin-bottom:10px">Leave blank to keep unchanged. Stored as irreversible hashes.</div>'+
+     '<div class="field"><label class="lb">Store user password (common)</label><input class="inp" id="pwS" type="password"></div>'+
+     '<div class="field"><label class="lb">AM password</label><input class="inp" id="pwA" type="password"></div>'+
+     '<div class="field"><label class="lb">Management password</label><input class="inp" id="pwM" type="password"></div>'+
+     '<div class="field"><label class="lb">Admin password</label><input class="inp" id="pwAd" type="password"></div>'+
+     '<button class="btn" id="pwSave">Update passwords</button></div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Data</span></div><div class="card pad">'+
+     '<button class="btn ghost sm" onclick="backupJSON()">Download full backup</button> '+
+     '<button class="btn ghost sm" onclick="cloudSheet()">Cloud database</button>'+
+     '<div class="note" style="margin-top:10px">'+(state.mode==='cloud'?'☁ Connected — all devices share this data.':'▣ Local mode — this device only.')+'</div>'+
+   '</div></div>';
+}
+function bindSettings(){
+  on('#seSave','click',async()=>{
+    state.settings.fyStart=N($('#seFy').value); state.settings.weekStart=N($('#seWk').value);
+    state.settings.minStock=N($('#seMin').value); state.settings.histEdit=$('#seHe').value;
+    state.settings.allowFuture=$('#seFu').checked;
+    await DB.saveSettings(); await DB.audit('SETTINGS_UPDATE','Business rules'); toast('Settings saved'); render();
+  });
+  on('#pwSave','click',async()=>{
+    const m=[['pwS','pwStore'],['pwA','pwAm'],['pwM','pwMgmt'],['pwAd','pwAdmin']];
+    let n=0;
+    for(const [el,key] of m){ const v=$('#'+el).value; if(v){ if(v.length<5) return toast('Passwords need at least 5 characters',true);
+      state.settings[key]=await sha(v); n++; } }
+    if(!n) return toast('Nothing to change',true);
+    await DB.saveSettings(); await DB.audit('PASSWORD_CHANGE',n+' password(s) updated');
+    toast(n+' password(s) updated'); render();
+  });
+}
+
+/* ==================== CHARTS ==================== */
+let charts={};
+function chartBox(id,title){ return '<div class="cbox"><h4>'+esc(title)+'</h4><div class="cwrap"><canvas id="'+id+'"></canvas></div></div>'; }
+const CC={plum:'#402C68',gold:'#E5A400',rose:'#C2185B',grey:'#B9B4C6',green:'#0E9F6E',red:'#D92D20'};
+function mk(id,type,data,opts){
+  const el=document.getElementById(id); if(!el||typeof Chart==='undefined') return;
+  if(charts[id]) charts[id].destroy();
+  charts[id]=new Chart(el,{type,data,options:Object.assign({responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:11,font:{size:11,family:'Manrope'}}}},
+    scales:{x:{ticks:{font:{size:9.5},maxRotation:60,minRotation:0}},y:{beginAtZero:true,ticks:{font:{size:10}}}}},opts||{})});
+}
+function drawCharts(){
+  const s=state.session, ids=scopeIds(s);
+  const mkk=monthKey(state.asOf), mfrom=mkk+'-01', mto=monthEnd(mfrom);
+  const days=dsrIn(ids,mfrom,Math.min?state.asOf:state.asOf);
+  const byDate={}; days.forEach(r=>{ const k=r.date; byDate[k]=byDate[k]||{ly:0,target:0,ty:0,sVal:0,sQty:0,qty:0};
+    ['ly','target','ty','sVal','sQty','qty'].forEach(f=>byDate[k][f]+=N(r[f])); });
+  const dates=Object.keys(byDate).sort(), lbl=dates.map(fmtShort);
+
+  if(document.getElementById('cTrend')||document.getElementById('cDaily')){
+    const id=document.getElementById('cTrend')?'cTrend':'cDaily';
+    mk(id,'bar',{labels:lbl,datasets:[
+      {label:'Target',data:dates.map(d=>byDate[d].target),backgroundColor:CC.grey,borderRadius:3},
+      {label:'TY Sale',data:dates.map(d=>byDate[d].ty),backgroundColor:CC.plum,borderRadius:3},
+      {label:'LY Sale',type:'line',data:dates.map(d=>byDate[d].ly),borderColor:CC.gold,backgroundColor:CC.gold,tension:.3,pointRadius:2}]});
+  }
+  if(document.getElementById('cSarees')){
+    mk('cSarees','bar',{labels:lbl,datasets:[
+      {label:'Sarees value',data:dates.map(d=>byDate[d].sVal),backgroundColor:CC.rose,borderRadius:3},
+      {label:'Other sales',data:dates.map(d=>Math.max(0,byDate[d].ty-byDate[d].sVal)),backgroundColor:CC.grey,borderRadius:3}]},
+      {scales:{x:{stacked:true,ticks:{font:{size:9.5}}},y:{stacked:true,beginAtZero:true}}});
+  }
+  if(document.getElementById('cSqty')){
+    mk('cSqty','line',{labels:lbl,datasets:[
+      {label:'Sarees qty',data:dates.map(d=>byDate[d].sQty),borderColor:CC.rose,backgroundColor:'rgba(194,24,91,.12)',fill:true,tension:.3,pointRadius:2},
+      {label:'Total qty',data:dates.map(d=>byDate[d].qty),borderColor:CC.plum,tension:.3,pointRadius:2}]});
+  }
+  if(document.getElementById('cStores')){
+    const {rows}=storeRows();
+    const top=rows.slice().sort((a,b)=>b.a.ty-a.a.ty).slice(0,12);
+    mk('cStores','bar',{labels:top.map(r=>r.s.storeId.replace(/^(EB|SB)-/,'')),datasets:[
+      {label:'Target',data:top.map(r=>r.a.target),backgroundColor:CC.grey,borderRadius:3},
+      {label:'TY Sale',data:top.map(r=>r.a.ty),backgroundColor:CC.plum,borderRadius:3}]});
+  }
+  if(document.getElementById('cRegion')||document.getElementById('cGroup')){
+    const id=document.getElementById('cRegion')?'cRegion':'cGroup';
+    const kind = (state.view==='am')?'am':'region';
+    const keys = kind==='am'? ams():regions();
+    const [f,t]=periodRange(state.period,state.asOf);
+    const dat=keys.map(k=>{ const sid=filteredStores().filter(x=>(kind==='am'?x.am:x.region)===k).map(x=>x.storeId);
+      const a=agg(state.period==='YTD'? rollIn(sid,f,t):dsrIn(sid,f,t)); return {k,v:a.ach===null?0:a.ach}; })
+      .filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+    mk(id,'bar',{labels:dat.map(x=>x.k),datasets:[{label:'Achievement %',data:dat.map(x=>Math.round(x.v*10)/10),
+      backgroundColor:dat.map(x=>x.v>=100?CC.green:(x.v>=90?CC.gold:CC.red)),borderRadius:3}]},
+      {plugins:{legend:{display:false}}});
+  }
+  if(document.getElementById('cStoreTrend')){
+    const sid=state.drill, mkm=state.calMonth||mkk;
+    const rs=dsrIn([sid],mkm+'-01',monthEnd(mkm+'-01'));
+    mk('cStoreTrend','bar',{labels:rs.map(r=>fmtShort(r.date)),datasets:[
+      {label:'Target',data:rs.map(r=>N(r.target)),backgroundColor:CC.grey,borderRadius:3},
+      {label:'TY Sale',data:rs.map(r=>N(r.ty)),backgroundColor:CC.plum,borderRadius:3},
+      {label:'LY',type:'line',data:rs.map(r=>N(r.ly)),borderColor:CC.gold,tension:.3,pointRadius:2}]});
+  }
+}
+
+/* ==================== ROUTER ==================== */
+function render(){
+  if(!state.session){ renderAuth(); return; }
+  $('#auth').classList.add('hide'); $('#shell').classList.remove('hide');
+  headerFor(); renderNav();
+  const r=state.session.role; const v=state.view;
+  let html='';
+  if(r==='store'){
+    html = v==='dsr'? storeDSR() : v==='sarees'? sareesScreen() : v==='stock'? stockStore(state.session.storeId)
+      : v==='learn'? learnScreen() : v==='history'? historyScreen() : storeHome();
+  } else {
+    if(v==='storeDetail') html=storeDetail();
+    else if(v==='region') html=groupScreen('region');
+    else if(v==='am') html=groupScreen('am');
+    else if(v==='perf') html=perfScreen();
+    else if(v==='pending') html=pendingScreen();
+    else if(v==='sarees') html=periodBar()+filterBar()+sareesScreen();
+    else if(v==='stock') html= state.drill? stockStore(state.drill) : stockScreen();
+    else if(v==='learn') html=learnScreen();
+    else if(v==='qa'&&r==='admin') html=qaScreen();
+    else if(v==='master'&&r==='admin') html=masterScreen();
+    else if(v==='audit'&&r==='admin') html=auditScreen();
+    else if(v==='settings'&&r==='admin') html=settingsScreen();
+    else html=controlHome();
+  }
+  $('#view').innerHTML=html;
+  if(v==='dsr') bindDSR();
+  if(v==='learn') bindAsk();
+  if(v==='settings') bindSettings();
+  if(v==='master'&&(state.tab||'stores')==='import') bindImport();
+  setTimeout(drawCharts,30);
+}
+
+/* ==================== BOOT ==================== */
+async function boot(){
+  state.asOf=todayISO(); state.calMonth=monthKey(state.asOf);
+  try{ await DB.init(); }catch(e){ console.error(e); }
+  if(!Object.keys(state.stores).length) await DB.seedStores();
+  if(!state.cats.length) state.cats=DEFAULT_CATS.slice();
+  state.ready=true;
+  try{ const s=JSON.parse(SS.get(LS.sess)||'null');
+    if(s && (s.role!=='store' || storeById(s.storeId))) state.session=s; }catch(e){}
+  render();
+}
+window.addEventListener('DOMContentLoaded',boot);
+
+/* test hooks */
+window.state=state; window.DB=DB; window.render=render; window.agg=agg; window.aggFor=aggFor;
+window.dsrIn=dsrIn; window.rollIn=rollIn; window.storeRows=storeRows; window.misRows=misRows;
+window.activeStores=activeStores; window.storeById=storeById; window.regions=regions; window.ams=ams;
+window.periodRange=periodRange; window.lowStockFor=lowStockFor; window.stockRows=stockRows;
+window.todayISO=todayISO; window.monthEnd=monthEnd; window.sha=sha; window.N=N; window.int=int;
+
+</script>
+</body>
+</html>
