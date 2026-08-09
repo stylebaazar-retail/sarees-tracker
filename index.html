@@ -439,14 +439,29 @@ function monthEnd(iso){ const y=+iso.slice(0,4), m=+iso.slice(5,7);
 
 /* ---------------- aggregation ---------------- */
 function agg(rows){
-  const a={ly:0,target:0,ty:0,qty:0,sQty:0,sVal:0,n:0};
-  for(const r of rows){ a.ly+=N(r.ly); a.target+=N(r.target); a.ty+=N(r.ty);
-    a.qty+=N(r.qty); a.sQty+=N(r.sQty); a.sVal+=N(r.sVal); a.n+=N(r.days||1); }
-  a.ach = a.target>0 ? a.ty/a.target*100 : null;
-  a.growth = a.ly>0 ? (a.ty-a.ly)/a.ly*100 : null;
+  const a={ly:0,target:0,ty:0,qty:0,sLy:0,sTarget:0,sVal:0,sQty:0,n:0};
+  for(const r of rows){
+    a.ly+=N(r.ly); a.target+=N(r.target); a.ty+=N(r.ty); a.qty+=N(r.qty);
+    a.sLy+=N(r.sLy); a.sTarget+=N(r.sTarget); a.sVal+=N(r.sVal); a.sQty+=N(r.sQty);
+    a.n+=N(r.days||1);
+  }
+  // Store level
+  a.ach    = a.target>0 ? a.ty/a.target*100 : null;
+  a.growth = a.ly>0 ? (a.ty-a.ly)/a.ly*100 : null;   // Store LFL %
+  a.gap    = a.ty-a.target;
+  // Sarees level
+  a.sAch   = a.sTarget>0 ? a.sVal/a.sTarget*100 : null;
+  a.sLfl   = a.sLy>0 ? (a.sVal-a.sLy)/a.sLy*100 : null;   // Sarees LFL %
+  a.sGap   = a.sVal-a.sTarget;
+  // Contribution
   a.sValPct = a.ty>0 ? a.sVal/a.ty*100 : null;
   a.sQtyPct = a.qty>0 ? a.sQty/a.qty*100 : null;
-  a.asp = a.sQty>0 ? a.sVal/a.sQty : null;
+  a.sLyPct  = a.ly>0 ? a.sLy/a.ly*100 : null;      // LY sarees share, for contribution movement
+  a.contribSwing = (a.sValPct!==null && a.sLyPct!==null) ? a.sValPct-a.sLyPct : null;
+  a.asp     = a.sQty>0 ? a.sVal/a.sQty : null;
+  a.aspStore= a.qty>0 ? a.ty/a.qty : null;
+  // LFL gap: how much sarees is out-growing (or lagging) the store
+  a.lflGap  = (a.growth!==null && a.sLfl!==null) ? a.sLfl-a.growth : null;
   return a;
 }
 function aggFor(ids,period,asOf){
@@ -585,7 +600,8 @@ const DB = {
     const rows=dsrIn([sid],from,to);
     const a=agg(rows);
     const doc={ storeId:sid, month:mk, ly:a.ly, target:a.target, ty:a.ty, qty:a.qty,
-      sQty:a.sQty, sVal:a.sVal, days:rows.length, updatedAt:nowStamp() };
+      sLy:a.sLy, sTarget:a.sTarget, sVal:a.sVal, sQty:a.sQty,
+      days:rows.length, updatedAt:nowStamp() };
     state.monthly[sid+'__'+mk]=doc;
     await DB.put(C.mon, sid+'__'+mk, doc);
   },
@@ -854,12 +870,8 @@ function storeHome(){
         ' replenishment: '+low.slice(0,3).map(x=>esc(x.cat)).join(', ')+(low.length>3?'…':'')+'</div>':'')+
     '<div class="sec"><div class="sech"><span class="sect">Performance · '+fmt(state.asOf)+'</span></div>'+
       periodBlock(ids)+'</div>'+
-    '<div class="sec"><div class="sech"><span class="sect">Sarees contribution · MTD</span></div>'+
-      '<div class="r3">'+
-        '<div class="mini"><div class="k">Sarees value</div><div class="v num">'+inr(a.sVal)+'</div></div>'+
-        '<div class="mini"><div class="k">Value contrib</div><div class="v num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</div></div>'+
-        '<div class="mini"><div class="k">Qty contrib</div><div class="v num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</div></div>'+
-      '</div></div>'+
+    '<div class="sec"><div class="sech"><span class="sect">Store vs Sarees · MTD</span></div>'+
+      lflCompare(a)+'</div>'+
     '<div class="sec"><button class="btn gold" onclick="go(\'dsr\')">'+(today?'Update today\'s DSR':'Submit today\'s DSR')+'</button>'+
       '<div style="height:8px"></div><button class="btn ghost" onclick="go(\'history\')">View my history</button></div>'+
     chartBox('cTrend','Daily sale vs target — this month');
@@ -882,17 +894,27 @@ function storeDSR(){
       '</div>'+
       (ex? '<div class="alert a-info" style="margin-top:12px">DSR already submitted for '+fmt(date)+
            (canEdit?'. You can update it below.':'. Editing this date needs Admin permission.')+'</div>':'')+
-      '<div class="hr"></div>'+
+
+      '<div class="hr"></div><div class="sect" style="margin-bottom:8px">A · STORE SALE</div>'+
       '<div class="fg" style="grid-template-columns:1fr 1fr">'+
         numField('dLy','LY Sale (₹)',ex?ex.ly:'')+
         numField('dTgt','TY Target (₹)',ex?ex.target:'')+
       '</div>'+
       numField('dTy','TY Sale (₹)',ex?ex.ty:'',true)+
+
+      '<div class="hr"></div><div class="sect" style="margin-bottom:8px">B · SAREES SALE</div>'+
       '<div class="fg" style="grid-template-columns:1fr 1fr">'+
-        numField('dQty','Store total qty',ex?ex.qty:'')+
-        numField('dSq','Sarees qty',ex?ex.sQty:'')+
+        numField('dSly','Sarees LY Sale (₹)',ex?ex.sLy:'')+
+        numField('dStg','Sarees TY Target (₹)',ex?ex.sTarget:'')+
       '</div>'+
-      numField('dSv','Sarees value (₹)',ex?ex.sVal:'')+
+      numField('dSv','Sarees TY Sale (₹)',ex?ex.sVal:'',true)+
+
+      '<div class="hr"></div><div class="sect" style="margin-bottom:8px">C · QUANTITY</div>'+
+      '<div class="fg" style="grid-template-columns:1fr 1fr">'+
+        numField('dQty','Store TY Qty',ex?ex.qty:'')+
+        numField('dSq','Sarees TY Qty',ex?ex.sQty:'')+
+      '</div>'+
+
       '<div class="field"><label class="lb">Remarks (optional)</label>'+
         '<input class="inp" id="dRm" value="'+esc(ex?ex.remarks:'')+'" placeholder="Short note"></div>'+
       '<div id="dCalc" class="alert a-info" style="display:none"></div>'+
@@ -913,40 +935,73 @@ function editAllowed(date){
   if(state.settings.histEdit==='any') return true;
   return date===todayISO();
 }
+
+
+/* Store LFL vs Sarees LFL side by side — the core comparison */
+function lflCompare(a){
+  const cell=(v,f)=> v===null? '<span class="m">N/A</span>' : '<b class="'+grCls(v)+'">'+f(v)+'</b>';
+  return '<div class="tw"><table><thead><tr><th></th><th>LY</th><th>Target</th><th>TY</th><th>Ach %</th><th>LFL %</th></tr></thead><tbody>'+
+    '<tr><td><b>Store</b></td><td class="num">'+inr(a.ly)+'</td><td class="num">'+inr(a.target)+'</td>'+
+      '<td class="num"><b>'+inr(a.ty)+'</b></td>'+
+      '<td class="num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</td>'+
+      '<td class="num">'+cell(a.growth,sgn)+'</td></tr>'+
+    '<tr><td><b style="color:var(--rose)">Sarees</b></td><td class="num">'+inr(a.sLy)+'</td><td class="num">'+inr(a.sTarget)+'</td>'+
+      '<td class="num"><b>'+inr(a.sVal)+'</b></td>'+
+      '<td class="num '+(a.sAch===null?'m':(a.sAch>=100?'g':a.sAch>=90?'w':'r'))+'">'+(a.sAch===null?'—':pct1(a.sAch))+'</td>'+
+      '<td class="num">'+cell(a.sLfl,sgn)+'</td></tr>'+
+    '</tbody></table></div>'+
+    '<div style="height:8px"></div><div class="r3">'+
+      '<div class="mini"><div class="k">Value contrib</div><div class="v num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</div>'+
+        (a.contribSwing===null?'':'<div class="k '+grCls(a.contribSwing)+'" style="letter-spacing:0;text-transform:none">'+sgn(a.contribSwing)+' vs LY</div>')+'</div>'+
+      '<div class="mini"><div class="k">Qty contrib</div><div class="v num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</div>'+
+        '<div class="k" style="letter-spacing:0;text-transform:none">'+int(a.sQty)+' of '+int(a.qty)+' pcs</div></div>'+
+      '<div class="mini"><div class="k">Sarees vs store LFL</div><div class="v num '+grCls(a.lflGap)+'">'+
+        (a.lflGap===null?'—':sgn(a.lflGap))+'</div>'+
+        '<div class="k" style="letter-spacing:0;text-transform:none">'+(a.lflGap===null?'no LY':(a.lflGap>=0?'outgrowing store':'lagging store'))+'</div></div>'+
+    '</div>';
+}
 function bindDSR(){
   const s=state.session, sid=s.storeId;
+  const F=['dLy','dTgt','dTy','dSly','dStg','dSv','dQty','dSq'];
   const calc=()=>{
-    const ty=N($('#dTy').value), tg=N($('#dTgt').value), ly=N($('#dLy').value);
-    const q=N($('#dQty').value), sq=N($('#dSq').value), sv=N($('#dSv').value);
-    if(!$('#dTy').value && !$('#dTgt').value){ $('#dCalc').style.display='none'; return; }
-    const ach = tg>0? ty/tg*100 : null, gr = ly>0? (ty-ly)/ly*100 : null;
-    const vc = ty>0? sv/ty*100 : null, qc = q>0? sq/q*100 : null;
+    const ly=N($('#dLy').value), tg=N($('#dTgt').value), ty=N($('#dTy').value);
+    const sly=N($('#dSly').value), stg=N($('#dStg').value), sv=N($('#dSv').value);
+    const q=N($('#dQty').value), sq=N($('#dSq').value);
+    if(F.every(id=>$('#'+id).value==='')){ $('#dCalc').style.display='none'; return; }
+    const ach=tg>0?ty/tg*100:null, lfl=ly>0?(ty-ly)/ly*100:null;
+    const sAch=stg>0?sv/stg*100:null, sLfl=sly>0?(sv-sly)/sly*100:null;
+    const vc=ty>0?sv/ty*100:null, qc=q>0?sq/q*100:null;
+    const p=(v,f)=> v===null?'N/A':f(v);
     $('#dCalc').style.display='block';
-    $('#dCalc').innerHTML='Achievement <b>'+(ach===null?'N/A':pct1(ach))+'</b> · Growth <b>'+
-      (gr===null?'N/A':sgn(gr))+'</b> · Sarees value <b>'+(vc===null?'N/A':pct1(vc))+
-      '</b> · Sarees qty <b>'+(qc===null?'N/A':pct1(qc))+'</b>';
+    $('#dCalc').innerHTML=
+      '<b>Store</b> · Ach '+p(ach,pct1)+' · LFL '+p(lfl,sgn)+'<br>'+
+      '<b>Sarees</b> · Ach '+p(sAch,pct1)+' · LFL '+p(sLfl,sgn)+'<br>'+
+      '<b>Contribution</b> · Value '+p(vc,pct1)+' · Qty '+p(qc,pct1);
   };
-  ['dLy','dTgt','dTy','dQty','dSq','dSv'].forEach(id=> on('#'+id,'input',calc));
-  calc();
+  F.forEach(id=> on('#'+id,'input',calc)); calc();
   on('#dDate','change',e=>{ state.dsrDate=e.target.value; render(); });
   on('#dReset','click',()=>{ state.dsrDate=state.asOf; render(); });
   on('#dSave','click',async()=>{
     const date=$('#dDate').value;
     const ly=N($('#dLy').value), tg=N($('#dTgt').value), ty=N($('#dTy').value);
-    const qty=N($('#dQty').value), sq=N($('#dSq').value), sv=N($('#dSv').value);
+    const sLy=N($('#dSly').value), sTarget=N($('#dStg').value), sVal=N($('#dSv').value);
+    const qty=N($('#dQty').value), sQty=N($('#dSq').value);
     if(!date) return toast('Choose a date',true);
     if(!state.settings.allowFuture && date>todayISO()) return toast('Future dates are not allowed',true);
-    if([ly,tg,ty,qty,sq,sv].some(v=>v<0)) return toast('Values cannot be negative',true);
-    if($('#dTy').value==='' || $('#dTgt').value==='') return toast('Enter TY Target and TY Sale',true);
-    if(sq>qty && qty>0) return toast('Sarees qty cannot exceed store total qty',true);
-    if(sv>ty && ty>0) return toast('Sarees value cannot exceed total sale',true);
+    if([ly,tg,ty,sLy,sTarget,sVal,qty,sQty].some(v=>v<0)) return toast('Values cannot be negative',true);
+    if($('#dTy').value==='' || $('#dTgt').value==='') return toast('Enter store TY Target and TY Sale',true);
+    if($('#dSv').value==='') return toast('Enter sarees TY Sale',true);
+    if(sVal>ty && ty>0) return toast('Sarees TY sale cannot exceed store TY sale',true);
+    if(sLy>ly && ly>0) return toast('Sarees LY sale cannot exceed store LY sale',true);
+    if(sTarget>tg && tg>0) return toast('Sarees target cannot exceed store target',true);
+    if(sQty>qty && qty>0) return toast('Sarees qty cannot exceed store total qty',true);
     if(!editAllowed(date)) return toast('This date is locked',true);
     const b=$('#dSave'); b.disabled=true; b.innerHTML='<span class="spin"></span>Saving…';
     try{
-      const old=await DB.saveDSR({ storeId:sid, date, ly, target:tg, ty, qty, sQty:sq, sVal:sv,
+      const old=await DB.saveDSR({ storeId:sid, date, ly, target:tg, ty, sLy, sTarget, sVal, qty, sQty,
         remarks:$('#dRm').value.trim(), updatedBy:(state.session.name||'store') });
       await DB.audit(old?'DSR_EDIT':'DSR_CREATE', sid+' · '+fmt(date),
-        old?{ly:old.ly,target:old.target,ty:old.ty}:null, {ly,target:tg,ty});
+        old?{ty:old.ty,sVal:old.sVal}:null, {ty,sVal});
       state.dsrDate=null;
       dsrSuccess(sid,date);
     }catch(e){ console.error(e); toast('Could not save: '+e.message,true);
@@ -954,15 +1009,21 @@ function bindDSR(){
   });
 }
 function dsrSuccess(sid,date){
-  const r=getDSR(sid,date), ach=N(r.target)>0? r.ty/r.target*100:null;
-  const vc=N(r.ty)>0? r.sVal/r.ty*100:null;
+  const r=getDSR(sid,date), a=agg([r]);
+  const p=(v,f)=> v===null?'N/A':f(v);
   openSheet('<div class="sh"><h3>DSR submitted successfully</h3><button class="x" onclick="closeSheet();render()">✕</button></div>'+
    '<div class="alert a-green">'+esc(sid)+' · '+fmt(date)+'</div>'+
-   '<div class="kv"><span>TY Sale</span><b class="num">'+inrFull(r.ty)+'</b></div>'+
-   '<div class="kv"><span>Target</span><b class="num">'+inrFull(r.target)+'</b></div>'+
-   '<div class="kv"><span>Achievement</span><b class="num">'+(ach===null?'N/A':pct1(ach))+'</b></div>'+
-   '<div class="kv"><span>Sarees value</span><b class="num">'+inrFull(r.sVal)+'</b></div>'+
-   '<div class="kv"><span>Sarees contribution</span><b class="num">'+(vc===null?'N/A':pct1(vc))+'</b></div>'+
+   '<div class="sect">Store</div>'+
+   '<div class="kv"><span>TY Sale / Target</span><b class="num">'+inrFull(r.ty)+' / '+inrFull(r.target)+'</b></div>'+
+   '<div class="kv"><span>Achievement</span><b class="num">'+p(a.ach,pct1)+'</b></div>'+
+   '<div class="kv"><span>LFL vs LY</span><b class="num '+grCls(a.growth)+'">'+p(a.growth,sgn)+'</b></div>'+
+   '<div class="hr"></div><div class="sect">Sarees</div>'+
+   '<div class="kv"><span>TY Sale / Target</span><b class="num">'+inrFull(r.sVal)+' / '+inrFull(r.sTarget)+'</b></div>'+
+   '<div class="kv"><span>Achievement</span><b class="num">'+p(a.sAch,pct1)+'</b></div>'+
+   '<div class="kv"><span>LFL vs LY</span><b class="num '+grCls(a.sLfl)+'">'+p(a.sLfl,sgn)+'</b></div>'+
+   '<div class="hr"></div><div class="sect">Contribution</div>'+
+   '<div class="kv"><span>Sarees value share</span><b class="num">'+p(a.sValPct,pct1)+'</b></div>'+
+   '<div class="kv"><span>Sarees qty share</span><b class="num">'+p(a.sQtyPct,pct1)+' ('+int(r.sQty)+'/'+int(r.qty)+')</b></div>'+
    '<div style="height:14px"></div>'+
    '<button class="btn" onclick="closeSheet();go(\'home\')">View dashboard</button>'+
    '<div style="height:8px"></div>'+
@@ -974,19 +1035,51 @@ function sareesScreen(){
   const ids=scopeIds(state.session);
   const a=aggFor(ids,state.period,state.asOf);
   return periodBar()+
-   '<div class="sec"><div class="kgrid">'+
-     '<div class="kpi hero"><div class="k">Sarees sale · '+state.period+'</div>'+
-       '<div class="v num">'+inr(a.sVal)+'</div><div class="s num">'+int(a.sQty)+' pcs · ASP '+(a.asp===null?'—':inrFull(a.asp))+'</div></div>'+
-     '<div class="kpi"><div class="k">Value contribution</div><div class="v num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</div>'+
-       '<div class="s num">of '+inr(a.ty)+' total</div></div>'+
-     '<div class="kpi"><div class="k">Qty contribution</div><div class="v num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</div>'+
-       '<div class="s num">of '+int(a.qty)+' pcs</div></div>'+
-   '</div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Store vs Sarees · '+state.period+'</span></div>'+
+     lflCompare(a)+'</div>'+
+   '<div class="sec"><div class="sech"><span class="sect">LFL comparison — all periods</span></div>'+
+     lflMatrix(ids)+'</div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Quantity report</span></div>'+
+     qtyReport(ids)+'</div>'+
+   chartBox('cLfl','Store LFL % vs Sarees LFL % — daily')+
    chartBox('cSarees','Sarees value vs other sales — daily')+
-   chartBox('cSqty','Sarees quantity trend')+
+   chartBox('cSqty','Sarees quantity vs store quantity')+
    (state.session.role==='store'? '' :
      '<div class="sec"><div class="sech"><span class="sect">Sarees by store</span></div>'+sareesTable()+'</div>');
 }
+
+/* FTD / WTD / MTD / YTD — store LFL beside sarees LFL */
+function lflMatrix(ids){
+  const P=['FTD','WTD','MTD','YTD'];
+  const c=(v,f)=> v===null? '<span class="m">N/A</span>' : '<b class="'+grCls(v)+'">'+f(v)+'</b>';
+  return '<div class="tw"><table><thead><tr><th>Period</th><th>Store TY</th><th>Store LFL</th>'+
+    '<th>Sarees TY</th><th>Sarees LFL</th><th>Diff</th><th>Val %</th><th>Qty %</th></tr></thead><tbody>'+
+    P.map(p=>{ const a=aggFor(ids,p,state.asOf);
+      return '<tr><td><b>'+p+'</b></td>'+
+        '<td class="num">'+inr(a.ty)+'</td><td class="num">'+c(a.growth,sgn)+'</td>'+
+        '<td class="num">'+inr(a.sVal)+'</td><td class="num">'+c(a.sLfl,sgn)+'</td>'+
+        '<td class="num">'+c(a.lflGap,sgn)+'</td>'+
+        '<td class="num">'+(a.sValPct===null?'—':pct1(a.sValPct))+'</td>'+
+        '<td class="num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</td></tr>'; }).join('')+
+    '</tbody></table></div>'+
+    '<div class="note" style="margin-top:7px">Diff = Sarees LFL − Store LFL. Positive means sarees are growing faster than the store.</div>';
+}
+
+/* Store qty vs sarees qty */
+function qtyReport(ids){
+  const P=['FTD','WTD','MTD','YTD'];
+  return '<div class="tw"><table><thead><tr><th>Period</th><th>Store qty</th><th>Sarees qty</th>'+
+    '<th>Other qty</th><th>Sarees qty %</th><th>Sarees ASP</th><th>Store ASP</th></tr></thead><tbody>'+
+    P.map(p=>{ const a=aggFor(ids,p,state.asOf);
+      return '<tr><td><b>'+p+'</b></td>'+
+        '<td class="num">'+int(a.qty)+'</td><td class="num"><b>'+int(a.sQty)+'</b></td>'+
+        '<td class="num">'+int(Math.max(0,a.qty-a.sQty))+'</td>'+
+        '<td class="num">'+(a.sQtyPct===null?'—':pct1(a.sQtyPct))+'</td>'+
+        '<td class="num">'+(a.asp===null?'—':inrFull(a.asp))+'</td>'+
+        '<td class="num">'+(a.aspStore===null?'—':inrFull(a.aspStore))+'</td></tr>'; }).join('')+
+    '</tbody></table></div>';
+}
+
 function sareesTable(){
   const [f,t]=periodRange(state.period,state.asOf);
   const rows=storesFor(state.session).map(s=>{
@@ -994,12 +1087,16 @@ function sareesTable(){
     return {s,a};
   }).filter(r=>r.a.sVal>0||r.a.ty>0).sort((x,y)=>y.a.sVal-x.a.sVal);
   if(!rows.length) return '<div class="card"><div class="empty">No sarees data in this period yet.</div></div>';
-  return '<div class="tw"><table><thead><tr><th>Store</th><th>Sarees ₹</th><th>Qty</th><th>Val %</th><th>Qty %</th><th>ASP</th></tr></thead><tbody>'+
-    rows.map(r=>'<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span></td>'+
-      '<td class="num">'+inr(r.a.sVal)+'</td><td class="num">'+int(r.a.sQty)+'</td>'+
+  return '<div class="tw"><table><thead><tr><th>Store</th><th>Sarees TY</th><th>S.Target</th><th>S.Ach%</th>'+
+    '<th>S.LFL%</th><th>Store LFL%</th><th>Diff</th><th>Val%</th><th>Qty%</th><th>ASP</th></tr></thead><tbody>'+
+    rows.map(r=>{ const c=(v)=> v===null? '<span class="m">N/A</span>' : '<b class="'+grCls(v)+'">'+sgn(v)+'</b>';
+      return '<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span></td>'+
+      '<td class="num">'+inr(r.a.sVal)+'</td><td class="num">'+inr(r.a.sTarget)+'</td>'+
+      '<td class="num '+(r.a.sAch===null?'m':(r.a.sAch>=100?'g':r.a.sAch>=90?'w':'r'))+'">'+(r.a.sAch===null?'—':pct1(r.a.sAch))+'</td>'+
+      '<td class="num">'+c(r.a.sLfl)+'</td><td class="num">'+c(r.a.growth)+'</td><td class="num">'+c(r.a.lflGap)+'</td>'+
       '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
       '<td class="num">'+(r.a.sQtyPct===null?'—':pct1(r.a.sQtyPct))+'</td>'+
-      '<td class="num">'+(r.a.asp===null?'—':inrFull(r.a.asp))+'</td></tr>').join('')+
+      '<td class="num">'+(r.a.asp===null?'—':inrFull(r.a.asp))+'</td></tr>'; }).join('')+
     '</tbody></table></div>';
 }
 
@@ -1201,14 +1298,19 @@ function historyScreen(){
      '<div class="mini"><div class="k">Sale</div><div class="v num">'+inr(a.ty)+'</div></div>'+
      '<div class="mini"><div class="k">Ach</div><div class="v num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</div></div>'+
    '</div></div>'+
-   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>Gr%</th><th>Qty</th><th>S.Qty</th><th>S.Val</th><th>Remarks</th></tr></thead><tbody>'+
-     rows.map(r=>{ const ac=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0? (r.ty-r.ly)/r.ly*100:null;
+   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>LFL%</th>'+
+     '<th>S.LY</th><th>S.Tgt</th><th>S.TY</th><th>S.Ach%</th><th>S.LFL%</th><th>Qty</th><th>S.Qty</th><th>Remarks</th></tr></thead><tbody>'+
+     rows.map(r=>{ const a=agg([r]); const c=(v)=> v===null?'<span class="m">N/A</span>':'<b class="'+grCls(v)+'">'+sgn(v)+'</b>';
        return '<tr><td>'+fmtShort(r.date)+'</td><td class="num">'+inr(r.ly)+'</td><td class="num">'+inr(r.target)+'</td>'+
        '<td class="num"><b>'+inr(r.ty)+'</b></td>'+
-       '<td class="num '+(ac===null?'m':(ac>=100?'g':ac>=90?'w':'r'))+'">'+(ac===null?'—':pct1(ac))+'</td>'+
-       '<td class="num '+grCls(gr)+'">'+(gr===null?'N/A':sgn(gr))+'</td>'+
-       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td><td class="num">'+inr(r.sVal)+'</td>'+
-       '<td style="text-align:left;white-space:normal;max-width:170px">'+esc(r.remarks||'')+'</td></tr>'; }).join('')+
+       '<td class="num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</td>'+
+       '<td class="num">'+c(a.growth)+'</td>'+
+       '<td class="num">'+inr(r.sLy)+'</td><td class="num">'+inr(r.sTarget)+'</td>'+
+       '<td class="num"><b>'+inr(r.sVal)+'</b></td>'+
+       '<td class="num '+(a.sAch===null?'m':(a.sAch>=100?'g':a.sAch>=90?'w':'r'))+'">'+(a.sAch===null?'—':pct1(a.sAch))+'</td>'+
+       '<td class="num">'+c(a.sLfl)+'</td>'+
+       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td>'+
+       '<td style="text-align:left;white-space:normal;max-width:150px">'+esc(r.remarks||'')+'</td></tr>'; }).join('')+
      '</tbody></table></div>'+
      '<div style="height:10px"></div><button class="btn ghost sm" onclick="exportRows(dsrIn([\''+esc(sid)+'\'],\''+from+'\',\''+to+'\'),\'csv\',\'my_dsr_'+mk+'\')">Export CSV</button>'
      : '<div class="card"><div class="empty">No DSR submitted in this month yet.</div></div>');
@@ -1264,7 +1366,8 @@ function storeRows(){
     if(typeof a==='string') return d*a.localeCompare(b);
     return d*(a-b);
   });
-  return {rows, tot:agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,sQty:a.sQty,sVal:a.sVal,days:1})))};
+  return {rows, tot:agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,
+    sLy:a.sLy,sTarget:a.sTarget,sVal:a.sVal,sQty:a.sQty,days:1})))};
 }
 function sortBy(k){ state.sort = state.sort.k===k? {k,d:-state.sort.d} : {k,d:-1}; render(); }
 function th(k,label){ const on=state.sort.k===k;
@@ -1291,6 +1394,9 @@ function controlHome(){
         '<div class="s">Like for like</div></div>'+
       '<div class="kpi"><div class="k">Sarees sale</div><div class="v num">'+inr(tot.sVal)+'</div>'+
         '<div class="s num">'+(tot.sValPct===null?'—':pct1(tot.sValPct))+' of sale</div></div>'+
+      '<div class="kpi"><div class="k">Sarees LFL</div><div class="v num '+grCls(tot.sLfl)+'">'+
+        (tot.sLfl===null?'N/A':sgn(tot.sLfl))+'</div>'+
+        '<div class="s">Store LFL '+(tot.growth===null?'N/A':sgn(tot.growth))+'</div></div>'+
       '<div class="kpi tap" onclick="go(\'pending\')"><div class="k">DSR submission</div>'+
         '<div class="v num '+(subm===ids.length?'g':(subm>=ids.length*0.9?'w':'r'))+'">'+subm+'/'+ids.length+'</div>'+
         '<div class="s">'+(ids.length-subm)+' pending today</div></div>'+
@@ -1347,12 +1453,13 @@ function groupScreen(kind){
     return {k,n:ss.length,ids,a,subm,st:statusOf(a)};
   }).filter(r=>r.n>0);
   rows.sort((x,y)=>(y.a.ach===null?-1:y.a.ach)-(x.a.ach===null?-1:x.a.ach));
-  const tot=agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,sQty:a.sQty,sVal:a.sVal,days:1})));
+  const tot=agg(rows.map(r=>r.a).map(a=>({ly:a.ly,target:a.target,ty:a.ty,qty:a.qty,
+    sLy:a.sLy,sTarget:a.sTarget,sVal:a.sVal,sQty:a.sQty,days:1})));
   return dateBar()+periodBar()+filterBar()+
     '<div class="sec"><div class="sech"><span class="sect">'+(kind==='region'?'Region':'AM')+' performance</span>'+
       '<button class="btn xs ghost" onclick="exportGroup(\''+kind+'\')">Export</button></div>'+
     '<div class="tw"><table><thead><tr><th>'+(kind==='region'?'Region':'AM')+'</th><th>Stores</th><th>LY</th><th>Target</th>'+
-      '<th>TY</th><th>Ach%</th><th>Gr%</th><th>Sarees</th><th>S%</th><th>DSR</th></tr></thead><tbody>'+
+      '<th>TY</th><th>Ach%</th><th>Store LFL%</th><th>Sarees TY</th><th>S.LFL%</th><th>Diff</th><th>Val%</th><th>DSR</th></tr></thead><tbody>'+
       rows.map(r=>'<tr><td><span class="lnk" onclick="drillGroup(\''+kind+'\',\''+esc(r.k)+'\')">'+esc(r.k)+'</span>'+
         (kind==='region'? '<div class="note">'+esc((activeStores().find(s=>s.region===r.k)||{}).am||'')+'</div>':'')+'</td>'+
         '<td class="num">'+r.n+'</td><td class="num">'+inr(r.a.ly)+'</td><td class="num">'+inr(r.a.target)+'</td>'+
@@ -1360,6 +1467,8 @@ function groupScreen(kind){
         '<td class="num '+achCls(r.a)+'">'+(r.a.ach===null?'—':pct1(r.a.ach))+'</td>'+
         '<td class="num '+grCls(r.a.growth)+'">'+(r.a.growth===null?'N/A':sgn(r.a.growth))+'</td>'+
         '<td class="num">'+inr(r.a.sVal)+'</td>'+
+        '<td class="num '+grCls(r.a.sLfl)+'">'+(r.a.sLfl===null?'N/A':sgn(r.a.sLfl))+'</td>'+
+        '<td class="num '+grCls(r.a.lflGap)+'">'+(r.a.lflGap===null?'N/A':sgn(r.a.lflGap))+'</td>'+
         '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
         '<td class="num '+(r.subm===r.n?'g':'r')+'">'+r.subm+'/'+r.n+'</td></tr>').join('')+
       '<tr style="background:#FAF9FC"><td><b>TOTAL</b></td><td class="num"><b>'+rows.reduce((x,r)=>x+r.n,0)+'</b></td>'+
@@ -1367,7 +1476,10 @@ function groupScreen(kind){
         '<td class="num"><b>'+inr(tot.ty)+'</b></td>'+
         '<td class="num '+achCls(tot)+'"><b>'+(tot.ach===null?'—':pct1(tot.ach))+'</b></td>'+
         '<td class="num '+grCls(tot.growth)+'"><b>'+(tot.growth===null?'N/A':sgn(tot.growth))+'</b></td>'+
-        '<td class="num"><b>'+inr(tot.sVal)+'</b></td><td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td><td></td></tr>'+
+        '<td class="num"><b>'+inr(tot.sVal)+'</b></td>'+
+        '<td class="num '+grCls(tot.sLfl)+'"><b>'+(tot.sLfl===null?'N/A':sgn(tot.sLfl))+'</b></td>'+
+        '<td class="num '+grCls(tot.lflGap)+'"><b>'+(tot.lflGap===null?'N/A':sgn(tot.lflGap))+'</b></td>'+
+        '<td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td><td></td></tr>'+
       '</tbody></table></div>'+
       '<div class="note" style="margin-top:8px">Achievement is always total sale ÷ total target — never an average of store percentages.</div></div>'+
     chartBox('cGroup',(kind==='region'?'Region':'AM')+'-wise achievement %');
@@ -1387,28 +1499,41 @@ function perfScreen(){
      '<span><button class="btn xs ghost" onclick="exportRows(misRows(),\'csv\',\'store_performance\')">CSV</button> '+
      '<button class="btn xs ghost" onclick="exportRows(misRows(),\'xlsx\',\'store_performance\')">Excel</button></span></div>'+
    '<div class="tw"><table><thead><tr>'+th('store','Store')+'<th>Region</th><th>AM</th><th>Type</th>'+
-     th('ly','LY')+th('target','Target')+th('ty','TY')+th('ach','Ach%')+th('growth','Gr%')+
-     th('qty','Qty')+th('sQty','S.Qty')+th('sVal','S.Val')+'<th>S.Val%</th><th>Status</th><th>DSR</th></tr></thead><tbody>'+
+     th('ly','LY')+th('target','Target')+th('ty','TY')+th('ach','Ach%')+th('growth','Store LFL%')+
+     '<th>S.LY</th><th>S.Tgt</th>'+th('sVal','S.TY')+'<th>S.Ach%</th><th>S.LFL%</th><th>Diff</th>'+
+     '<th>Qty</th>'+th('sQty','S.Qty')+'<th>Qty%</th><th>Val%</th><th>Status</th><th>DSR</th></tr></thead><tbody>'+
      (page.length? page.map(r=>{ const d=getDSR(r.s.storeId,state.asOf);
+       const c=(v)=> v===null? '<span class="m">N/A</span>' : '<b class="'+grCls(v)+'">'+sgn(v)+'</b>';
        return '<tr><td><span class="lnk" onclick="openStore(\''+esc(r.s.storeId)+'\')">'+esc(r.s.storeId)+'</span></td>'+
        '<td>'+esc(r.s.region)+'</td><td style="text-align:right">'+esc(r.s.am)+'</td>'+
        '<td><span class="chip">'+esc(r.s.storeType)+'</span></td>'+
        '<td class="num">'+inr(r.a.ly)+'</td><td class="num">'+inr(r.a.target)+'</td>'+
        '<td class="num"><b>'+inr(r.a.ty)+'</b></td>'+
        '<td class="num '+achCls(r.a)+'">'+(r.a.ach===null?'—':pct1(r.a.ach))+'</td>'+
-       '<td class="num '+grCls(r.a.growth)+'">'+(r.a.growth===null?'N/A':sgn(r.a.growth))+'</td>'+
-       '<td class="num">'+int(r.a.qty)+'</td><td class="num">'+int(r.a.sQty)+'</td><td class="num">'+inr(r.a.sVal)+'</td>'+
+       '<td class="num">'+c(r.a.growth)+'</td>'+
+       '<td class="num">'+inr(r.a.sLy)+'</td><td class="num">'+inr(r.a.sTarget)+'</td>'+
+       '<td class="num"><b>'+inr(r.a.sVal)+'</b></td>'+
+       '<td class="num '+(r.a.sAch===null?'m':(r.a.sAch>=100?'g':r.a.sAch>=90?'w':'r'))+'">'+(r.a.sAch===null?'—':pct1(r.a.sAch))+'</td>'+
+       '<td class="num">'+c(r.a.sLfl)+'</td><td class="num">'+c(r.a.lflGap)+'</td>'+
+       '<td class="num">'+int(r.a.qty)+'</td><td class="num">'+int(r.a.sQty)+'</td>'+
+       '<td class="num">'+(r.a.sQtyPct===null?'—':pct1(r.a.sQtyPct))+'</td>'+
        '<td class="num">'+(r.a.sValPct===null?'—':pct1(r.a.sValPct))+'</td>'+
        '<td><span class="pill '+r.st.c+'">'+r.st.t+'</span></td>'+
        '<td>'+(d?'<span class="pill p-g">IN</span>':'<span class="pill p-r">PEND</span>')+'</td></tr>'; }).join('')
-      : '<tr><td colspan="15"><div class="empty">No stores match these filters.</div></td></tr>')+
+      : '<tr><td colspan="21"><div class="empty">No stores match these filters.</div></td></tr>')+
      '<tr style="background:#FAF9FC"><td colspan="4"><b>TOTAL ('+rows.length+')</b></td>'+
        '<td class="num"><b>'+inr(tot.ly)+'</b></td><td class="num"><b>'+inr(tot.target)+'</b></td>'+
        '<td class="num"><b>'+inr(tot.ty)+'</b></td>'+
        '<td class="num '+achCls(tot)+'"><b>'+(tot.ach===null?'—':pct1(tot.ach))+'</b></td>'+
        '<td class="num '+grCls(tot.growth)+'"><b>'+(tot.growth===null?'N/A':sgn(tot.growth))+'</b></td>'+
+       '<td class="num"><b>'+inr(tot.sLy)+'</b></td><td class="num"><b>'+inr(tot.sTarget)+'</b></td>'+
+       '<td class="num"><b>'+inr(tot.sVal)+'</b></td>'+
+       '<td class="num"><b>'+(tot.sAch===null?'—':pct1(tot.sAch))+'</b></td>'+
+       '<td class="num '+grCls(tot.sLfl)+'"><b>'+(tot.sLfl===null?'N/A':sgn(tot.sLfl))+'</b></td>'+
+       '<td class="num '+grCls(tot.lflGap)+'"><b>'+(tot.lflGap===null?'N/A':sgn(tot.lflGap))+'</b></td>'+
        '<td class="num"><b>'+int(tot.qty)+'</b></td><td class="num"><b>'+int(tot.sQty)+'</b></td>'+
-       '<td class="num"><b>'+inr(tot.sVal)+'</b></td><td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td>'+
+       '<td class="num"><b>'+(tot.sQtyPct===null?'—':pct1(tot.sQtyPct))+'</b></td>'+
+       '<td class="num"><b>'+(tot.sValPct===null?'—':pct1(tot.sValPct))+'</b></td>'+
        '<td colspan="2"></td></tr></tbody></table></div>'+
    (pages>1? '<div class="pgr"><button class="btn ghost sm" '+(state.page<=1?'disabled':'')+
       ' onclick="state.page--;render()">← Prev</button>'+
@@ -1439,17 +1564,23 @@ function storeDetail(){
         '<div class="s num">'+inr(a.ty)+' / '+inr(a.target)+'</div>'+
         '<div class="s">Gr <b class="'+grCls(a.growth)+'">'+(a.growth===null?'N/A':sgn(a.growth))+'</b></div></div>';
     }).join('')+'</div></div>'+
+   '<div class="sec"><div class="sech"><span class="sect">Store vs Sarees · '+state.period+'</span></div>'+
+     lflCompare(aggFor([sid],state.period,state.asOf))+'</div>'+
    (low.length? '<div class="alert a-warn">Low stock: '+low.map(x=>esc(x.cat)+' ('+x.current+')').join(', ')+'</div>':'')+
    '<div class="sec"><div class="sech"><span class="sect">Daily history</span>'+
      '<input class="inp" style="width:auto;padding:7px 9px;font-size:13px" type="month" value="'+mk+'" onchange="state.calMonth=this.value;render()"></div>'+
-   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>Gr%</th>'+
-     '<th>Qty</th><th>S.Qty</th><th>S.Val</th><th>Remarks</th>'+(isAdmin?'<th></th>':'')+'</tr></thead><tbody>'+
-     rows.map(r=>{ const ac=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0?(r.ty-r.ly)/r.ly*100:null;
+   (rows.length? '<div class="tw"><table><thead><tr><th>Date</th><th>LY</th><th>Target</th><th>TY</th><th>Ach%</th><th>LFL%</th>'+
+     '<th>S.LY</th><th>S.Tgt</th><th>S.TY</th><th>S.Ach%</th><th>S.LFL%</th><th>Qty</th><th>S.Qty</th><th>Remarks</th>'+(isAdmin?'<th></th>':'')+'</tr></thead><tbody>'+
+     rows.map(r=>{ const a=agg([r]); const c=(v)=> v===null?'<span class="m">N/A</span>':'<b class="'+grCls(v)+'">'+sgn(v)+'</b>';
        return '<tr><td>'+fmtShort(r.date)+'</td><td class="num">'+inr(r.ly)+'</td><td class="num">'+inr(r.target)+'</td>'+
        '<td class="num"><b>'+inr(r.ty)+'</b></td>'+
-       '<td class="num '+(ac===null?'m':(ac>=100?'g':ac>=90?'w':'r'))+'">'+(ac===null?'—':pct1(ac))+'</td>'+
-       '<td class="num '+grCls(gr)+'">'+(gr===null?'N/A':sgn(gr))+'</td>'+
-       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td><td class="num">'+inr(r.sVal)+'</td>'+
+       '<td class="num '+achCls(a)+'">'+(a.ach===null?'—':pct1(a.ach))+'</td>'+
+       '<td class="num">'+c(a.growth)+'</td>'+
+       '<td class="num">'+inr(r.sLy)+'</td><td class="num">'+inr(r.sTarget)+'</td>'+
+       '<td class="num"><b>'+inr(r.sVal)+'</b></td>'+
+       '<td class="num '+(a.sAch===null?'m':(a.sAch>=100?'g':a.sAch>=90?'w':'r'))+'">'+(a.sAch===null?'—':pct1(a.sAch))+'</td>'+
+       '<td class="num">'+c(a.sLfl)+'</td>'+
+       '<td class="num">'+int(r.qty)+'</td><td class="num">'+int(r.sQty)+'</td>'+
        '<td style="text-align:left;white-space:normal;max-width:150px">'+esc(r.remarks||'')+
          '<div class="note">'+esc(r.updatedBy||'')+'</div></td>'+
        (isAdmin?'<td><button class="btn xs ghost" onclick="adminEdit(\''+esc(sid)+'\',\''+r.date+'\')">Edit</button></td>':'')+
@@ -1558,22 +1689,27 @@ function adminEdit(sid,date){
   openSheet('<div class="sh"><h3>Correct DSR</h3><button class="x" onclick="closeSheet()">✕</button></div>'+
    '<div class="note" style="margin-bottom:10px">'+esc(sid)+'</div>'+
    '<div class="field"><label class="lb">Date</label><input class="inp" id="aeDate" type="date" value="'+date+'"></div>'+
+   '<div class="sect" style="margin-bottom:8px">A · Store sale</div>'+
    '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeLy','LY Sale',ex.ly)+numField('aeTg','TY Target',ex.target)+'</div>'+
    numField('aeTy','TY Sale',ex.ty,true)+
-   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeQ','Total qty',ex.qty)+numField('aeSq','Sarees qty',ex.sQty)+'</div>'+
-   numField('aeSv','Sarees value',ex.sVal)+
+   '<div class="hr"></div><div class="sect" style="margin-bottom:8px">B · Sarees sale</div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeSly','Sarees LY',ex.sLy)+numField('aeStg','Sarees Target',ex.sTarget)+'</div>'+
+   numField('aeSv','Sarees TY Sale',ex.sVal,true)+
+   '<div class="hr"></div><div class="sect" style="margin-bottom:8px">C · Quantity</div>'+
+   '<div class="fg" style="grid-template-columns:1fr 1fr">'+numField('aeQ','Store TY Qty',ex.qty)+numField('aeSq','Sarees TY Qty',ex.sQty)+'</div>'+
    '<div class="field"><label class="lb">Remarks</label><input class="inp" id="aeRm" value="'+esc(ex.remarks||'')+'"></div>'+
    '<button class="btn" id="aeSave">Save correction</button>'+
    (getDSR(sid,date)?'<div style="height:8px"></div><button class="btn dgr" id="aeDel">Delete this entry</button>':''));
   on('#aeSave','click',async()=>{
     const d=$('#aeDate').value; if(!d) return toast('Choose a date',true);
     const rec={ storeId:sid, date:d, ly:N($('#aeLy').value), target:N($('#aeTg').value), ty:N($('#aeTy').value),
-      qty:N($('#aeQ').value), sQty:N($('#aeSq').value), sVal:N($('#aeSv').value),
+      sLy:N($('#aeSly').value), sTarget:N($('#aeStg').value), sVal:N($('#aeSv').value),
+      qty:N($('#aeQ').value), sQty:N($('#aeSq').value),
       remarks:$('#aeRm').value.trim(), updatedBy:'admin' };
     if(Object.values(rec).some(v=>typeof v==='number'&&v<0)) return toast('Values cannot be negative',true);
     const old=await DB.saveDSR(rec);
     await DB.audit('DSR_ADMIN_EDIT', sid+' · '+fmt(d),
-      old?{ly:old.ly,target:old.target,ty:old.ty}:null,{ly:rec.ly,target:rec.target,ty:rec.ty});
+      old?{ty:old.ty,sVal:old.sVal}:null,{ty:rec.ty,sVal:rec.sVal});
     closeSheet(); toast('Entry corrected'); render();
   });
   on('#aeDel','click',async()=>{ if(!confirm('Delete the DSR for '+fmt(date)+'?')) return;
@@ -1722,14 +1858,18 @@ function misRows(){
   return dsrIn(ids,from,to);
 }
 function rowOut(r){
-  const s=storeById(r.storeId)||{};
-  const ach=N(r.target)>0? r.ty/r.target*100:null, gr=N(r.ly)>0?(r.ty-r.ly)/r.ly*100:null;
+  const s=storeById(r.storeId)||{}, a=agg([r]);
+  const p=v=> v===null?'N/A':Math.round(v*10)/10;
   return { Date:fmt(r.date), Store:r.storeId, State:s.state||'', Region:s.region||'', AM:s.am||'',
-    'Store Type':s.storeType||'', 'LY Sale':N(r.ly), 'TY Target':N(r.target), 'TY Sale':N(r.ty),
-    'Ach %': ach===null?'N/A':Math.round(ach*10)/10, 'Growth %': gr===null?'N/A':Math.round(gr*10)/10,
-    'Gap': N(r.ty)-N(r.target), 'Total Qty':N(r.qty), 'Sarees Qty':N(r.sQty), 'Sarees Value':N(r.sVal),
-    'Sarees Qty %': N(r.qty)>0? Math.round(r.sQty/r.qty*1000)/10 : 'N/A',
-    'Sarees Value %': N(r.ty)>0? Math.round(r.sVal/r.ty*1000)/10 : 'N/A',
+    'Store Type':s.storeType||'',
+    'Store LY':N(r.ly), 'Store Target':N(r.target), 'Store TY':N(r.ty),
+    'Store Ach %':p(a.ach), 'Store LFL %':p(a.growth), 'Store Gap':a.gap,
+    'Sarees LY':N(r.sLy), 'Sarees Target':N(r.sTarget), 'Sarees TY':N(r.sVal),
+    'Sarees Ach %':p(a.sAch), 'Sarees LFL %':p(a.sLfl), 'Sarees Gap':a.sGap,
+    'LFL Diff (S−Store) %':p(a.lflGap),
+    'Store Qty':N(r.qty), 'Sarees Qty':N(r.sQty), 'Other Qty':Math.max(0,N(r.qty)-N(r.sQty)),
+    'Sarees Qty %':p(a.sQtyPct), 'Sarees Value %':p(a.sValPct),
+    'Sarees ASP':a.asp===null?'N/A':Math.round(a.asp), 'Store ASP':a.aspStore===null?'N/A':Math.round(a.aspStore),
     Remarks:r.remarks||'', 'Last Updated':r.updatedAt||'', 'Updated By':r.updatedBy||'' };
 }
 function download(blob,name){ const u=URL.createObjectURL(blob); const a=document.createElement('a');
@@ -1840,8 +1980,9 @@ function drawCharts(){
   const s=state.session, ids=scopeIds(s);
   const mkk=monthKey(state.asOf), mfrom=mkk+'-01', mto=monthEnd(mfrom);
   const days=dsrIn(ids,mfrom,Math.min?state.asOf:state.asOf);
-  const byDate={}; days.forEach(r=>{ const k=r.date; byDate[k]=byDate[k]||{ly:0,target:0,ty:0,sVal:0,sQty:0,qty:0};
-    ['ly','target','ty','sVal','sQty','qty'].forEach(f=>byDate[k][f]+=N(r[f])); });
+  const byDate={}; days.forEach(r=>{ const k=r.date;
+    byDate[k]=byDate[k]||{ly:0,target:0,ty:0,sLy:0,sTarget:0,sVal:0,sQty:0,qty:0};
+    ['ly','target','ty','sLy','sTarget','sVal','sQty','qty'].forEach(f=>byDate[k][f]+=N(r[f])); });
   const dates=Object.keys(byDate).sort(), lbl=dates.map(fmtShort);
 
   if(document.getElementById('cTrend')||document.getElementById('cDaily')){
@@ -1858,9 +1999,18 @@ function drawCharts(){
       {scales:{x:{stacked:true,ticks:{font:{size:9.5}}},y:{stacked:true,beginAtZero:true}}});
   }
   if(document.getElementById('cSqty')){
-    mk('cSqty','line',{labels:lbl,datasets:[
-      {label:'Sarees qty',data:dates.map(d=>byDate[d].sQty),borderColor:CC.rose,backgroundColor:'rgba(194,24,91,.12)',fill:true,tension:.3,pointRadius:2},
-      {label:'Total qty',data:dates.map(d=>byDate[d].qty),borderColor:CC.plum,tension:.3,pointRadius:2}]});
+    mk('cSqty','bar',{labels:lbl,datasets:[
+      {label:'Sarees qty',data:dates.map(d=>byDate[d].sQty),backgroundColor:CC.rose,borderRadius:3},
+      {label:'Other qty',data:dates.map(d=>Math.max(0,byDate[d].qty-byDate[d].sQty)),backgroundColor:CC.grey,borderRadius:3}]},
+      {scales:{x:{stacked:true,ticks:{font:{size:9.5}}},y:{stacked:true,beginAtZero:true}}});
+  }
+  if(document.getElementById('cLfl')){
+    const sl=dates.map(d=>{const x=byDate[d]; return x.ly>0? Math.round((x.ty-x.ly)/x.ly*1000)/10 : null;});
+    const ss=dates.map(d=>{const x=byDate[d]; return x.sLy>0? Math.round((x.sVal-x.sLy)/x.sLy*1000)/10 : null;});
+    mk('cLfl','line',{labels:lbl,datasets:[
+      {label:'Store LFL %',data:sl,borderColor:CC.plum,backgroundColor:CC.plum,tension:.3,pointRadius:3,spanGaps:true},
+      {label:'Sarees LFL %',data:ss,borderColor:CC.rose,backgroundColor:CC.rose,tension:.3,pointRadius:3,spanGaps:true}]},
+      {scales:{y:{beginAtZero:false,ticks:{font:{size:10}}}}});
   }
   if(document.getElementById('cStores')){
     const {rows}=storeRows();
