@@ -175,7 +175,12 @@ tr:last-child td{border-bottom:0}
 </style>
 </head>
 <body>
-<div id="auth"></div>
+<div id="auth"><div class="acard" style="text-align:center;padding:34px 22px">
+  <div class="btile" style="margin:0 auto 14px">SB</div>
+  <div class="bt1">STYLE BAAZAR SAREES</div>
+  <div class="bt2" style="margin-top:4px">Loading…</div>
+  <div id="bootMsg" class="note" style="margin-top:14px">Connecting to the database</div>
+</div></div>
 <div id="shell" class="hide">
   <header class="top">
     <div class="toprow">
@@ -2075,17 +2080,58 @@ function render(){
 }
 
 /* ==================== BOOT ==================== */
+function bootMsg(t){ const e=document.getElementById('bootMsg'); if(e) e.textContent=t; }
+
+function fatal(msg){
+  const a=document.getElementById('auth');
+  if(!a) return;
+  a.innerHTML='<div class="acard"><div class="brand"><div class="btile">SB</div><div>'+
+    '<div class="bt1">Could not start</div><div class="bt2">Style Baazar Sarees</div></div></div>'+
+    '<div class="alert a-red">'+esc(msg)+'</div>'+
+    '<button class="btn" onclick="location.reload()">Try again</button>'+
+    '<div style="height:8px"></div>'+
+    '<button class="btn ghost" onclick="location.reload(true)">Reload fresh copy</button>'+
+    '<div class="foot">If this keeps happening, check your internet connection, or open the link in a new incognito tab.</div></div>';
+}
+
 async function boot(){
   state.asOf=todayISO(); state.calMonth=monthKey(state.asOf);
-  try{ await DB.init(); }catch(e){ console.error(e); }
-  if(!Object.keys(state.stores).length) await DB.seedStores();
-  if(!state.cats.length) state.cats=DEFAULT_CATS.slice();
-  state.ready=true;
-  try{ const s=JSON.parse(SS.get(LS.sess)||'null');
-    if(s && (s.role!=='store' || storeById(s.storeId))) state.session=s; }catch(e){}
-  render();
+  try{
+    bootMsg('Connecting to the database');
+    // Never leave the user on a blank screen: if the cloud is slow or blocked,
+    // carry on so the app is at least usable.
+    await Promise.race([
+      DB.init(),
+      new Promise(res=>setTimeout(()=>{ if(state.mode!=='cloud'){ console.warn('cloud slow — continuing'); } res(); },12000))
+    ]);
+  }catch(e){ console.error('init',e); }
+
+  try{
+    bootMsg('Preparing stores');
+    if(!Object.keys(state.stores).length) await DB.seedStores();
+    if(!state.cats.length) state.cats=DEFAULT_CATS.slice();
+    state.ready=true;
+    try{ const s=JSON.parse(SS.get(LS.sess)||'null');
+      if(s && (s.role!=='store' || storeById(s.storeId))) state.session=s; }catch(e){}
+    render();
+  }catch(e){
+    console.error('boot',e);
+    fatal('Something went wrong while starting the app: '+(e&&e.message?e.message:e));
+  }
 }
+
+// Any unexpected error anywhere should show a message, never a blank screen.
+window.addEventListener('error',e=>{
+  if(!state.ready && document.getElementById('bootMsg'))
+    fatal((e.message||'Unexpected error')+'. Please reload.');
+});
+window.addEventListener('unhandledrejection',e=>{
+  if(!state.ready && document.getElementById('bootMsg'))
+    fatal('Could not reach the database. Check your internet and reload.');
+});
 window.addEventListener('DOMContentLoaded',boot);
+setTimeout(()=>{ if(!state.ready) bootMsg('Still connecting… this can take a moment on a slow network'); },6000);
+setTimeout(()=>{ if(!state.ready) fatal('The database is not responding. Tap Try again, or open the link in a new incognito tab.'); },25000);
 
 /* test hooks */
 window.state=state; window.DB=DB; window.render=render; window.agg=agg; window.aggFor=aggFor;
